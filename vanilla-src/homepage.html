@@ -12,6 +12,12 @@
             color: white;
         }
 
+        .logo {
+            border-radius: 50%;
+            background-color: #42b1b1;
+            padding: 1rem 1rem 1rem 1rem;
+        }
+
         #recordTable {
             border-collapse: collapse;
             text-align: left;
@@ -71,7 +77,7 @@
         }
 
         #upcomingGamesTable tr:hover {
-            background-color: #42b1b1;
+            background-color: rgb(199, 199, 25);
         }
 
         /* Recent Games Table*/
@@ -85,7 +91,7 @@
             -0.2rem -0.2rem 0.2rem #999;
         }
         #recentGamesTable tr:hover {
-            background-color: #42b1b1;
+            background-color: rgb(199, 199, 25);
         }
 
         .recentMiddleCell {
@@ -139,7 +145,7 @@
 
     <!-- Logo -->
     <section>
-        <img src="LAGalaxy.svg">
+        <img src="LAGalaxy.svg" class="logo">
     </section>
     <section>
         <table id="recordTable">
@@ -162,13 +168,13 @@
     <table id="upcomingGamesTable" class="gamesTable">
         <tr>
             <td>
-                <img src="LAGalaxy.svg"></br><h5>LA Galaxy</h5>
+                <img src="LAGalaxy.svg" class="logo"></br><h5>LA Galaxy</h5>
             </td>
             <td><span id="scoreCell">1 - 0</span>
                 </br><span id="timeCell">45: 53</span>
             </td>
             <td>
-                <img src="SFDelta.svg"></br><h5>SF Deltas</h5>
+                <img src="SFDelta.svg" class="logo"></br><h5>SF Deltas</h5>
             </td>
         </tr>
     </table>
@@ -177,24 +183,24 @@
         <table id="recentGamesTable" class="gamesTable">
             <tr>
                 <td>
-                    <img src="LAGalaxy.svg"></br><h5>LA Galaxy</h5>
+                    <img src="LAGalaxy.svg" class="logo"></br><h5>LA Galaxy</h5>
                 </td>
                 <td><span class="recentMiddleCell">1 - 1</span>
                     </br><span class="recentMiddleCell recentMiddleCellBottom">Tie</span>
                 </td>
                 <td>
-                    <img src="TorontoFC.svg"></br><h5>Torronto FC</h5>
+                    <img src="TorontoFC.svg" class="logo"></br><h5>Torronto FC</h5>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <img src="LAGalaxy.svg"></br><h5>LA Galaxy</h5>
+                    <img src="LAGalaxy.svg" class="logo"></br><h5>LA Galaxy</h5>
                 </td>
                 <td><span class="recentMiddleCell">2 - 1</span>
                     </br><span class="recentMiddleCell recentMiddleCellBottom">W</span>
                 </td>
                 <td>
-                    <img src="MontrealImpact.svg"></br><h5>Montreal Impact</h5>
+                    <img src="MontrealImpact.svg" class="logo"></br><h5>Montreal Impact</h5>
                 </td>
             </tr>
         </table>
