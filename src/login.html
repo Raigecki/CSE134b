@@ -3,7 +3,6 @@
   <head>
     <title>Login</title>
     <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">
-    <script src=""></script>
     <style>
       .row{
         margin: 0;
@@ -48,14 +47,22 @@
       <p><input class="form-control" id="login_email_input" type="text" name="login_email" placeholder="e-mail address"></p>
       <p><input class="form-control" id="login_password_input" type="text" name="login_password" placeholder="password"></p>
       <div class="row">
-        <a href src="">Forgot password?</a>
+        <a href="forgot_password.html">Forgot password?</a>
         <label class="pull-right" for="login_forgot_password">Remember me</label>
         <input class="pull-right" id="login_forgot_password_input" type="checkbox" name="login_forgot_password">
       </div>      
     </form>
     <div class="row">
-      <button id="login_button" class="btn">Login</button>
-      <button id="create_account_button" class="btn pull-right">Create Account</button>
+      <button id="login_button" class="btn" onclick="goToHome()">Login</button>
+      <button id="create_account_button" class="btn pull-right" onclick="goToCreateAcct()">Create Account</button>
     </div>
+    <script>
+      function goToHome() {
+        location.href = ("homepage.html");
+      }
+      function goToCreateAcct() {
+        location.href = ("create_account.html");
+      }
+    </script>
   </body>
 </html>
