@@ -7,29 +7,36 @@
     <style>
         body {
             text-align: center;
-            margin: 7% 2% 2% 2%;
+            margin: 7% 0 2% 00;
+            background-color: #111;
+            color: white;
         }
 
         #recordTable {
             border-collapse: collapse;
             text-align: left;
-            font-size: 2rem;
+            font-size: 2.5rem;
             width: 100%;
             margin-top: 5rem;
-            background-color: rgb(196, 196, 196);
+            background-color: #111;
+            box-shadow: 
+            0.2rem 0.2rem 0.2rem #999,
+            -0.2rem 0.2rem 0.2rem #999,
+            0.2rem -0.2rem 0.2rem #999,
+            -0.2rem -0.2rem 0.2rem #999;
         }
 
         #recordTable tr {
+            padding: 0 2rem 0 2rem;
             height: 7rem;
         }
 
-        #recordTable tr:nth-child(odd) {
+        #recordTable tr :nth-child(odd) {
             text-align: left;
-            width: 35%;
+            width: 30%;
         }
 
         /* Games Table*/
-
         .gamesTable{
             border-collapse: collapse;
             width: 100%;
@@ -37,7 +44,7 @@
         }
 
         .gamesTable td {
-            width: 33%;
+            width: 33.3%;
         }
 
         .gamesTable img {
@@ -55,13 +62,30 @@
         }
 
         #upcomingGamesTable {
-            background-color: rgb(196, 196, 196);
+            background-color: #111;
+            box-shadow: 
+            0.2rem 0.2rem 0.2rem #999,
+            -0.2rem 0.2rem 0.2rem #999,
+            0.2rem -0.2rem 0.2rem #999,
+            -0.2rem -0.2rem 0.2rem #999;
+        }
+
+        #upcomingGamesTable tr:hover {
+            background-color: #42b1b1;
         }
 
         /* Recent Games Table*/
 
-        #recentGamesTable tr:nth-child(even) {
-            background-color: rgb(196, 196, 196);
+        #recentGamesTable tr {
+            background-color: #111;
+            box-shadow: 
+            0.2rem 0.2rem 0.2rem #999,
+            -0.2rem 0.2rem 0.2rem #999,
+            0.2rem -0.2rem 0.2rem #999,
+            -0.2rem -0.2rem 0.2rem #999;
+        }
+        #recentGamesTable tr:hover {
+            background-color: #42b1b1;
         }
 
         .recentMiddleCell {
@@ -73,7 +97,7 @@
         }    
 
         #scoreCell {
-            font-size: 5rem;
+            font-size: 4rem;
         }
 
         #timeCell {
@@ -126,9 +150,9 @@
                 <td id="goalsForData">15</td>
             </tr>
             <tr>
-                <td>Team Standing</td>
+                <td>Team Standing:</td>
                 <td id="teamStandingData">2nd</td>
-                <td>Goals Against</td>
+                <td>Goals Against:</td>
                 <td id="goalsForData">3</td>
             </tr>
         </table>

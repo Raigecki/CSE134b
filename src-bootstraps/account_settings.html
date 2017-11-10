@@ -63,6 +63,16 @@
         div label {
             font-size: 4rem;
         }
+
+        .btn {
+            height: 10rem;
+            font-size: 5rem;
+            width: 100%;
+            margin-top: 5rem;
+            line-height: 7rem;
+            background-color: #42b1b1;
+            color: white;
+        }
     </style>
 
     <!-- Modal Styles -->
@@ -162,75 +172,6 @@
             }
         }
     </style>
-
-    <!-- Bootstrap styles-->
-    <style>
-        /* ---------------- Button ---------------- */
-
-        .btn {
-            display: inline-block;
-            padding: 10px 16px;
-            margin-bottom: 0;
-            font-size: 5rem;
-            font-weight: normal;
-            line-height: 1.42857143;
-            text-align: center;
-            white-space: nowrap;
-            vertical-align: middle;
-            -ms-touch-action: manipulation;
-            touch-action: manipulation;
-            cursor: pointer;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            background-image: none;
-            border: 1px solid transparent;
-            border-radius: 6px;
-            width: 100%;
-            height: 10rem;
-            background-color: #42b1b1;
-            color: white;
-            padding: 10px 16px;
-        }
-
-        .btn:focus,
-        .btn:active:focus,
-        .btn.active:focus,
-        .btn.focus,
-        .btn:active.focus,
-        .btn.active.focus {
-            outline: 5px auto -webkit-focus-ring-color;
-            outline-offset: -2px;
-        }
-
-        .btn:hover,
-        .btn:focus,
-        .btn.focus {
-            color: #333;
-            text-decoration: none;
-        }
-
-        .btn:active,
-        .btn.active {
-            background-image: none;
-            outline: 0;
-            -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
-            box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
-        }
-
-        .btn.disabled,
-        .btn[disabled],
-        fieldset[disabled] .btn {
-            cursor: not-allowed;
-            filter: alpha(opacity=65);
-            -webkit-box-shadow: none;
-            box-shadow: none;
-            opacity: .65;
-        }
-
-    </style>
-
 </head>
 
 <body>
@@ -245,7 +186,7 @@
             <label for="email">E-mail Address:</label>
             <p>
                 <span class="entry">stevendanieledwin@ucsd.edu</span>
-                <span id="changeEmail" class="glyphicon-pencil"></span>
+                <span id="changeEmail" class="glyphicon glyphicon-pencil"></span>
             </p>
         </div>
         <div class="sectionEntry">
