@@ -6,11 +6,16 @@
     <meta charset="utf-8">
 </head>
 <style>
+    html {
+        font-size: 10px;
+    }
+
     body {
         text-align: center;
         margin: 5% 5% 5% 5%;
         font-size: 4rem;
     }
+
     .nav {
         display: block;
         padding-left: 0;
@@ -136,10 +141,63 @@
         font-weight: 900;
     }
 
+    #menuTabs {
+        margin-bottom: 3rem;
+    }
+
+    .nav-pills>li {
+            float: left;
+        }
+
+        .nav-pills>li>a {
+            border-radius: 4px;
+        }
+
+        .nav-pills>li+li {
+            margin-left: 2px;
+        }
+
+        .nav-pills>li.active>a,
+        .nav-pills>li.active>a:hover,
+        .nav-pills>li.active>a:focus {
+            color: #fff;
+            background-color: #337ab7;
+        }
+
+        .nav-justified {
+            width: 100%;
+        }
+
+        .nav-justified>li {
+            display: table-cell;
+            width: 1%;
+            float: none;
+        }
+
+        .nav-justified>li>a {
+            margin-bottom: 5px;
+            text-align: center;
+        }
 </style>
 
 <body>
-    <h2>Schedule</h2>
+    <ul id="menuTabs" class="nav nav-pills nav-justified">
+        <li>
+            <a data-toggle="pill" href="homepage.html">Home</a>
+        </li>
+        <li class="active">
+            <a data-toggle="pill">Schedule</a>
+        </li>
+        <li>
+            <a data-toggle="pill" href="roster_vanilla.html">Roster</a>
+        </li>
+        <li>
+            <a data-toggle="pill" href="input_stats_vanilla.html">Input</a>
+        </li>
+        <li>
+            <a data-toggle="pill" href="account_settings.html">Settings</a>
+        </li>
+    </ul>
     <ul class="nav nav-tabs">
         <li>
             <a data-toggle="tab" href="schedule_upcoming.html">Ongoing/Upcoming</a>

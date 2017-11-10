@@ -5,7 +5,6 @@
     <title>Home</title>
     <meta charset="utf-8">
     <style>
-        
         body {
             text-align: center;
             margin: 7% 0 2% 00;
@@ -40,7 +39,8 @@
         }
 
         /* Games Table*/
-        .gamesTable{
+
+        .gamesTable {
             border-collapse: collapse;
             width: 100%;
             border: 0;
@@ -56,9 +56,9 @@
             height: 200px;
         }
 
-        .gamesTable span{
+        .gamesTable span {
             display: block;
-        }  
+        }
 
         .gamesTable h5 {
 
@@ -75,6 +75,7 @@
             border-bottom: 0.1rem solid #aaa;
             padding-top: 1rem;
         }
+
         #recentGamesTable tr:hover {
             background-color: orange;
         }
@@ -85,7 +86,7 @@
 
         .recentMiddleCellBottom {
             margin-top: 3rem;
-        }    
+        }
 
         #scoreCell {
             font-size: 4rem;
@@ -123,11 +124,91 @@
             left: 0.5em;
             margin-right: -50%;
         }
+
+        li>a {
+            font-size: 2rem;
+        }
+
+        #menuTabs {
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .nav {
+            display: block;
+            padding-left: 0;
+            margin-bottom: 0;
+            list-style: none;
+        }
+
+        .nav:before,
+        .nav:after {
+            display: table;
+            content: " ";
+        }
+
+        .nav:after,
+            {
+            clear: both;
+        }
+
+        .nav>li {
+            position: relative;
+            display: block;
+        }
+
+        .nav>li>a {
+            position: relative;
+            display: block;
+            text-decoration: none;
+            font-size: 3rem;
+            padding: 10px 15px;
+        }
+
+        .nav>li>a:hover,
+        .nav>li>a:focus {
+            text-decoration: none;
+            background-color: #eee;
+        }
+
+        .nav-pills>li {
+            float: left;
+        }
+
+        .nav-pills>li>a {
+            border-radius: 4px;
+        }
+
+        .nav-pills>li+li {
+            margin-left: 2px;
+        }
+
+        .nav-pills>li.active>a,
+        .nav-pills>li.active>a:hover,
+        .nav-pills>li.active>a:focus {
+            color: #fff;
+            background-color: #337ab7;
+        }
+
+        .nav-justified {
+            width: 100%;
+        }
+
+        .nav-justified>li {
+            display: table-cell;
+            width: 1%;
+            float: none;
+        }
+
+        .nav-justified>li>a {
+            margin-bottom: 5px;
+            text-align: center;
+        }
     </style>
 
     <!-- Tabs Styles -->
     <style>
-        li > a {
+        li>a {
             font-size: 2rem;
         }
 
@@ -145,26 +226,26 @@
         <img src="LAGalaxy.svg" class="logo">
     </section>
     <section>
-            <ul id="menuTabs" class="nav nav-pills nav-justified">
-                    <li class="active">
-                        <a data-toggle="pill">Home</a>
-                    </li>
-                    <li>
-                        <a data-toggle="pill" href="schedule_upcoming.html">Schedule</a>
-                    </li>
-                    <li>
-                        <a data-toggle="pill" href="roster.html">Roster</a>
-                    </li>
-                    <li>
-                        <a data-toggle="pill" href="input_stats.html">Input</a>
-                    </li>
-                    <li>
-                        <a data-toggle="pill" href="account_settings.html">Settings</a>
-                    </li>
-                </ul>
-    </section>
-    <section>
-        <h3>Current Record</h3>            
+        <ul id="menuTabs" class="nav nav-pills nav-justified">
+            <li class="active">
+                <a data-toggle="pill">Home</a>
+            </li>
+            <li>
+                <a data-toggle="pill" href="schedule_upcoming.html">Schedule</a>
+            </li>
+            <li>
+                <a data-toggle="pill" href="roster_vanilla.html">Roster</a>
+            </li>
+            <li>
+                <a data-toggle="pill" href="input_stats_vanilla.html">Input</a>
+            </li>
+            <li>
+                <a data-toggle="pill" href="account_settings.html">Settings</a>
+            </li>
+        </ul>
+        <section>
+        </section>
+        <h3>Current Record</h3>
         <table id="recordTable">
             <tr>
                 <td>Team Record:</td>
@@ -184,13 +265,19 @@
     <table id="upcomingGamesTable" class="gamesTable">
         <tr>
             <td>
-                <img src="LAGalaxy.svg" class="logo"></br><h5>LA Galaxy</h5>
-            </td>
-            <td><span id="scoreCell">1 - 0</span>
-                </br><span id="timeCell">45: 53</span>
+                <img src="LAGalaxy.svg" class="logo">
+                </br>
+                <h5>LA Galaxy</h5>
             </td>
             <td>
-                <img src="SFDelta.svg" class="logo"></br><h5>SF Deltas</h5>
+                <span id="scoreCell">1 - 0</span>
+                </br>
+                <span id="timeCell">45: 53</span>
+            </td>
+            <td>
+                <img src="SFDelta.svg" class="logo">
+                </br>
+                <h5>SF Deltas</h5>
             </td>
         </tr>
     </table>
@@ -199,24 +286,36 @@
         <table id="recentGamesTable" class="gamesTable">
             <tr>
                 <td>
-                    <img src="LAGalaxy.svg" class="logo"></br><h5>LA Galaxy</h5>
-                </td>
-                <td><span class="recentMiddleCell">1 - 1</span>
-                    </br><span class="recentMiddleCell recentMiddleCellBottom">Tie</span>
+                    <img src="LAGalaxy.svg" class="logo">
+                    </br>
+                    <h5>LA Galaxy</h5>
                 </td>
                 <td>
-                    <img src="TorontoFC.svg" class="logo"></br><h5>Torronto FC</h5>
+                    <span class="recentMiddleCell">1 - 1</span>
+                    </br>
+                    <span class="recentMiddleCell recentMiddleCellBottom">Tie</span>
+                </td>
+                <td>
+                    <img src="TorontoFC.svg" class="logo">
+                    </br>
+                    <h5>Torronto FC</h5>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <img src="LAGalaxy.svg" class="logo"></br><h5>LA Galaxy</h5>
-                </td>
-                <td><span class="recentMiddleCell">2 - 1</span>
-                    </br><span class="recentMiddleCell recentMiddleCellBottom">W</span>
+                    <img src="LAGalaxy.svg" class="logo">
+                    </br>
+                    <h5>LA Galaxy</h5>
                 </td>
                 <td>
-                    <img src="MontrealImpact.svg" class="logo"></br><h5>Montreal Impact</h5>
+                    <span class="recentMiddleCell">2 - 1</span>
+                    </br>
+                    <span class="recentMiddleCell recentMiddleCellBottom">W</span>
+                </td>
+                <td>
+                    <img src="MontrealImpact.svg" class="logo">
+                    </br>
+                    <h5>Montreal Impact</h5>
                 </td>
             </tr>
         </table>
