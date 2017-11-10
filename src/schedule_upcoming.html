@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Current/Upcoming Games</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">
+</head>
+<style>
+    body {
+        text-align: center;
+        margin: 5% 5% 5% 5%;
+        font-size: 4rem;
+    }
+
+    h2 {
+        margin-bottom: 2rem;
+        font-size: 6rem;
+    }
+
+    .well {
+        margin-top: 2rem;
+    }
+
+    ul li {
+        width: 50%;
+    }
+
+    div p {
+        font-size: 2.5rem;
+    }
+
+    .col-xs-3 p:nth-child(1) {
+        margin-bottom: 5rem;
+    }
+
+    .btn {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    #addGame, #removeGame {
+        font-size: 3.5rem;
+    }
+
+    #manageButton {
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 2.5rem;
+        height: 4.5rem;
+        vertical-align: middle;
+        width: 15%;
+        margin-right: 5%;
+        margin-top: 5.85%;
+    }
+
+    .form-control {
+        height: 8rem;
+        font-size: 4rem;
+        margin-bottom: 2rem;
+    }
+
+    #gamesList_delete option {
+        font-size: 2rem;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        line-height: 100%;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-content {
+        position: relative;
+        background-color: #fefefe;
+        border-radius: 10px;
+        border: 1px solid #888;
+        width: 80%;
+        margin: 10%;
+        vertical-align: middle;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        -webkit-animation-name: animatetop;
+        -webkit-animation-duration: 0.5s;
+        animation-name: animatetop;
+        animation-duration: 0.5s
+    }
+
+    .modal-header {
+        border-radius: 10px 10px 0px 0px;
+        padding: 4px;
+        background-color: #42b1b1;
+        text-align: center;
+        color: white;
+        height: 10rem;
+        font-size: 4.5rem;
+        padding: 1rem 1rem 1rem 2rem;
+    }
+
+    .modal-body {
+        padding: 4%;
+        text-align: center;
+    }
+
+    .modal label {
+        display: block;
+        text-align: left;
+    }
+
+    .modal-header>span:nth-child(1) {
+        display: inline-block;
+        margin-top: 1.5rem;
+    }
+
+    /* The Close Button */
+
+    .close {
+        color: white;
+        float: right;
+        font-size: 6rem;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .btn {
+        width: 100%;
+        height: 10rem;
+        font-size: 5rem;
+    }
+
+    /* Add Animation */
+
+    @-webkit-keyframes animatetop {
+        from {
+            top: -300px;
+            opacity: 0
+        }
+        to {
+            top: 0;
+            opacity: 1
+        }
+    }
+
+    @keyframes animatetop {
+        from {
+            top: -300px;
+            opacity: 0
+        }
+        to {
+            top: 0;
+            opacity: 1
+        }
+    }
+</style>
+
+<body>
+    <h2>Schedule</h2>
+    <button type="button" class="btn btn-info" id="manageButton" onclick="displayManageOpts()">Manage</button>
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a data-toggle="tab" href="">Ongoing/Upcoming</a>
+        </li>
+        <li>
+            <a data-toggle="tab" href="schedule_previous.html">Previous</a>
+        </li>
+    </ul>
+    <div class="well row">
+        <div class="col-xs-3">
+            <p>Team Aztecs</p>
+            <p>(Home)</p>
+        </div>
+        <div class="col-xs-6">
+            <p>Nov 15, 2017 5:00 PM</p>
+            <p>vs</p>
+            <p>Balboa Park, San Diego</p>
+        </div>
+        <div class="col-xs-3">
+            <p>Opponent</p>
+            <p>(Away)</p>
+        </div>
+    </div>
+    <div class="well row">
+        <div class="col-xs-3">
+            <p>Team Aztecs</p>
+            <p>(Away)</p>
+        </div>
+        <div class="col-xs-6">
+            <p>Nov 17, 2017 6:00 PM</p>
+            <p>vs</p>
+            <p>Hourglass Field, Mira Mesa</p>
+        </div>
+        <div class="col-xs-3">
+            <p>Opponent</p>
+            <p>(Home)</p>
+        </div>
+    </div>
+    <div class="well row">
+        <div class="col-xs-3">
+            <p>Team Aztecs</p>
+            <p>(Away)</p>
+        </div>
+        <div class="col-xs-6">
+            <p>Nov 20, 2017 5:30 PM</p>
+            <p>vs</p>
+            <p>Athletic Field, Pacific Peach</p>
+        </div>
+        <div class="col-xs-3">
+            <p>Opponent</p>
+            <p>(Home)</p>
+        </div>
+    </div>
+    <div class="well row">
+        <div class="col-xs-3">
+            <p>Team Aztecs</p>
+            <p>(Home)</p>
+        </div>
+        <div class="col-xs-6">
+            <p>Nov 21, 2017 7:00 PM</p>
+            <p>vs</p>
+            <p>Balboa Park, San Diego</p>
+        </div>
+        <div class="col-xs-3">
+            <p>Opponent</p>
+            <p>(Away)</p>
+        </div>
+    </div>
+    <div class="well row">
+        <div class="col-xs-3">
+            <p>Team Aztecs</p>
+            <p>(Home)</p>
+        </div>
+        <div class="col-xs-6">
+            <p>Nov 23, 2017 5:00 PM</p>
+            <p>vs</p>
+            <p>Balboa Park, San Diego</p>
+        </div>
+        <div class="col-xs-3">
+            <p>Opponent</p>
+            <p>(Away)</p>
+        </div>
+    </div>
+    <div class="well row">
+        <div class="col-xs-3">
+            <p>Team Aztecs</p>
+            <p>(Home)</p>
+        </div>
+        <div class="col-xs-6">
+            <p>Nov 28, 2017 8:00 PM</p>
+            <p>vs</p>
+            <p>Balboa Park, San Diego</p>
+        </div>
+        <div class="col-xs-3">
+            <p>Opponent</p>
+            <p>(Away)</p>
+        </div>
+    </div>
+    <div class="well row">
+        <div class="col-xs-3">
+            <p>Team Aztecs</p>
+            <p>(Away)</p>
+        </div>
+        <div class="col-xs-6">
+            <p>Dec 2, 2017 6:00 PM</p>
+            <p>vs</p>
+            <p>El Corazon Park, Oceanside</p>
+        </div>
+        <div class="col-xs-3">
+            <p>Opponent</p>
+            <p>(Home)</p>
+        </div>
+    </div>
+    <div class="well row">
+        <div class="col-xs-3">
+            <p>Team Aztecs</p>
+            <p>(Away)</p>
+        </div>
+        <div class="col-xs-6">
+            <p>Dec 4, 2017 6:30 PM</p>
+            <p>vs</p>
+            <p>Coronado Cays Park, Coronado</p>
+        </div>
+        <div class="col-xs-3">
+            <p>Opponent</p>
+            <p>(Home)</p>
+        </div>
+    </div>
+    <!-- Manage Options Modal -->
+    <div id="manageModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span>Manage Games</span>
+                <span id="closeManageGames" class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-6 text-left">
+                        <button type="button" id="addGame" class="btn btn-success btn-lg" onclick="displayAddGame()">Add Game</button>
+                    </div>
+                    <div class="col-xs-6 text-right">
+                        <button type="button" id="removeGame" class="btn btn-danger btn-lg" onclick="displayRemoveGame()">Remove Game</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Add Game Modal -->
+    <div id="addGameModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span>Add Game</span>
+                <span id="closeAddGame" class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+
+                <form id="addGameForm">
+                    <label for="addGame_opponent">Opponent:</label>
+                    <input type="text" name="addGame_opponent" id="addGame_opponent" class="form-control">
+                    <label for="addGame_date">Date:</label>
+                    <input type="date" name="addGame_date" id="addGame_date" class="form-control">
+                    <label for="addGame_time">Time:</label>
+                    <input type="time" name="addGame_time" id="addGame_time" class="form-control">
+                    <label for="homeaway_status">Home/Away:</label>
+                    <input type="text" name="homeaway_status" id="homeaway_status" class="form-control">
+                    <label for="addGame_loc">Location:</label>
+                    <input type="text" name="addGame_loc" id="addGame_loc" class="form-control">
+                    <label for="addGame_city">City:</label>
+                    <input type="text" name="addGame_city" id="addGame_city" class="form-control">
+                    <input type="submit" id="addGameSubmit" name="addGameSubmit" class="btn btn-lg btn-success" value="Create Game">
+                </form>
+            </div>
+        </div>
+    </div>
+        <!-- Delete Game Modal -->
+        <div id="deleteGameModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span>Delete Game</span>
+                    <span id="closeDeleteGame" class="close">&times;</span>
+                </div>
+                <div class="modal-body">
+
+                    <form id="deleteGameForm">
+                        <select id="gamesList_delete" name="gamesList_delete" class="form-control">
+                            <option value="0" selected disabled>-- Select a Game to Remove--</option>
+                            <option value="1">Nov 15, 2017 5:00 PM vs Opponent @ Balboa Park, San Diego</option>
+                            <option value="2">Nov 17, 2017 6:00 PM vs Opponent @ Hourglass Field, Mira Mesa</option>
+                            <option value="3">Nov 20, 2017 5:30 PM vs Opponent @ Athletic Field, Pacific Peach</option>
+                            <option value="4">Nov 21, 2017 7:00 PM vs Opponent @ Balboa Park, San Diego</option>
+                            <option value="5">Nov 23, 2017 5:00 PM vs Opponent @ Balboa Park, San Diego</option>
+                        </select>
+                        <input type="submit" id="deleteGameSubmit" name="deleteGameSubmit" class="btn btn-lg btn-danger" value="Remove Game">
+                    </form>
+                </div>
+            </div>
+        </div>
+            <script>
+                function displayManageOpts() {
+                    var manageModal = document.getElementById('manageModal');
+                    manageModal.style.display = 'block';
+                }
+                function displayAddGame() {
+                    var addModal = document.getElementById('addGameModal');
+                    var manageModal = document.getElementById('manageModal');
+                    manageModal.style.display = 'none';
+                    addModal.style.display = 'block';
+                }
+                function displayRemoveGame() {
+                    console.log('remove game called');
+                    var deleteModal = document.getElementById('deleteGameModal');
+                    var manageModal = document.getElementById('manageModal');
+                    manageModal.style.display = 'none';
+                    deleteModal.style.display = 'block';
+                    console.log('return from remove');
+                }
+                document.getElementById('closeManageGames').onclick = function() {
+                    var modal = this.parentNode.parentNode.parentNode;
+                    modal.style.display = 'none';
+                }
+                document.getElementById('closeAddGame').onclick = function() {
+                    var modal = this.parentNode.parentNode.parentNode;
+                    modal.style.display = 'none';
+                }
+                document.getElementById('closeDeleteGame').onclick = function() {
+                    var modal = this.parentNode.parentNode.parentNode;
+                    modal.style.display = 'none';
+                }
+            </script>
+</body>
+
+</html>

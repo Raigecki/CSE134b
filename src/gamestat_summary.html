@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Game Summary</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">
+</head>
+<style>
+    body {
+        text-align: center;
+        margin: 5% 5% 5% 5%;
+        font-size: 4rem;
+    }
+
+    h2 {
+        margin-bottom: 2rem;
+        font-size: 6rem;
+    }
+
+    .well {
+        margin-top: 2rem;
+    }
+
+    .well * {
+        font-size: 3rem;
+    }
+
+    ul li {
+        width: 50%;
+    }
+
+    div p {
+        font-size: 2.5rem;
+    }
+
+    .teaminfo p:nth-child(1) {
+        margin-bottom: 5rem;
+    }
+
+    .gameinfo p {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .score {
+        font-weight: 800;
+    }
+
+    .score p {
+        margin-top: 6rem;
+    }
+
+    h3 {
+        overflow: hidden;
+        text-align: center;
+        font-size: 4rem;
+        margin-bottom: 2rem;
+    }
+
+    h3:before,
+    h3:after {
+        background-color: #000;
+        content: "";
+        display: inline-block;
+        height: 1px;
+        position: relative;
+        vertical-align: middle;
+        width: 50%;
+    }
+
+    h3:before {
+        right: 0.5em;
+        margin-left: -50%;
+    }
+
+    h3:after {
+        left: 0.5em;
+        margin-right: -50%;
+    }
+
+    .matchInfo {
+        margin-bottom: 3rem;
+    }
+
+    .stat {
+        background-color: rgb(0,20,56);
+        color:#FFF;
+    }
+
+    .statValue {
+        background-color: rgb(242,242,242);
+    }
+
+    #editButton {
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 2.5rem;
+        line-height: 4rem;
+        vertical-align: middle;
+        width: 15%;
+        margin-right: 5%;
+        margin-top: 5.5%;
+    }
+
+    #exitButton {
+        margin-top: 2.5rem;
+        font-size: 4rem;
+        width: 100%;
+    }
+</style>
+
+<body>
+    <h2>Game Stats</h2>
+    <button type="button" class="btn btn-info" id="editButton" onclick="enableEditing()">Edit</button>
+    <p><span id="gameDate">Nov 6, 2017</span> @ <span id="gameLoc">Balboa Park, San Diego</span></p>
+    <div class="well row">
+        <div class="col-xs-4 teaminfo">
+            <p>Team Aztecs</p>
+            <p>(<span class="locationStatus">Home</span>)</p>
+        </div>
+        <div class="col-xs-1 score">
+            <p>1</p>
+        </div>
+        <div class="col-xs-2 gameinfo">
+            <p>90:00</p>
+            <p>-</p>
+        </div>
+        <div class="col-xs-1 score">
+            <p>0</p>
+        </div>
+        <div class="col-xs-4 teaminfo">
+            <p id="opponentName">Opponent</p>
+            <p>(<span class="locationStatus">Away</span>)</p>
+        </div>
+    </div>
+    <h3>Stats</h3>
+    <div class="row matchInfo">
+        <div class="col-xs-3 statValue">1</div>
+        <div class="col-xs-6 stat">Goals</div>
+        <div class="col-xs-3 statValue">0</div>
+    </div>
+    <div class="row matchInfo">
+        <div class="col-xs-3 statValue">2</div>
+        <div class="col-xs-6 stat">Goal Kicks</div>
+        <div class="col-xs-3 statValue">1</div>
+    </div>
+    <div class="row matchInfo">
+        <div class="col-xs-3 statValue">1</div>
+        <div class="col-xs-6 stat">Penalty Kicks</div>
+        <div class="col-xs-3 statValue">0</div>
+    </div>
+    <div class="row matchInfo">
+        <div class="col-xs-3 statValue">3</div>
+        <div class="col-xs-6 stat">Corner Kicks</div>
+        <div class="col-xs-3 statValue">2</div>
+    </div>
+    <div class="row matchInfo">
+        <div class="col-xs-3 statValue">65%</div>
+        <div class="col-xs-6 stat">Possession Time</div>
+        <div class="col-xs-3 statValue">35%</div>
+    </div>
+    <div class="row matchInfo">
+        <div class="col-xs-3 statValue">3</div>
+        <div class="col-xs-6 stat">Steals</div>
+        <div class="col-xs-3 statValue">3</div>
+    </div>
+    <div class="row matchInfo">
+        <div class="col-xs-3 statValue">1</div>
+        <div class="col-xs-6 stat">Saves</div>
+        <div class="col-xs-3 statValue">1</div>
+    </div>
+    <div class="row matchInfo">
+        <div class="col-xs-3 statValue">0</div>
+        <div class="col-xs-6 stat">Fouls</div>
+        <div class="col-xs-3 statValue">1</div>
+    </div>
+    <div class="row matchInfo">
+        <div class="col-xs-3 statValue">0</div>
+        <div class="col-xs-6 stat">Yellow Cards</div>
+        <div class="col-xs-3 statValue">0</div>
+    </div>
+    <div class="row matchInfo">
+        <div class="col-xs-3 statValue">0</div>
+        <div class="col-xs-6 stat">Red Cards</div>
+        <div class="col-xs-3 statValue">0</div>
+    </div>
+    <button type="button" class="btn btn-primary" id="exitButton" onclick="history.back()">Exit Game Stats</button>
+    <script>
+        function enableEditing() {
+            var editBtn = document.getElementById('editButton');
+            var gameDate = document.getElementById('gameDate');
+            var gameLoc = document.getElementById('gameLoc');
+            var oppName = document.getElementById('opponentName');
+            if (editBtn.innerHTML == 'Edit') {
+                var stats = document.getElementsByClassName('statValue');
+                var locStatus = document.getElementsByClassName('locationStatus');
+                for (var i = 0; i < stats.length; i++) {
+                    stats.item(i).setAttribute('contenteditable', 'true');
+                }
+                for (var i = 0; i < locStatus.length; i++) {
+                    locStatus.item(i).setAttribute('contenteditable', 'true');
+                }
+                gameDate.setAttribute('contenteditable', 'true');
+                gameLoc.setAttribute('contenteditable', 'true');
+                oppName.setAttribute('contenteditable', 'true');
+                var saveBtnStyle = editBtn.getAttribute('class').replace('btn-info', 'btn-success');
+                editBtn.setAttribute('class', saveBtnStyle);
+                editBtn.innerHTML = 'Save';
+            }
+            else if (editBtn.innerHTML == 'Save') {
+                var stats = document.getElementsByClassName('statValue');
+                var locStatus = document.getElementsByClassName('locationStatus');
+                for (var i = 0; i < stats.length; i++) {
+                    stats.item(i).setAttribute('contenteditable', 'false');
+                }
+                for (var i = 0; i < locStatus.length; i++) {
+                    locStatus.item(i).setAttribute('contenteditable', 'false');
+                }
+                gameDate.setAttribute('contenteditable', 'false');
+                gameLoc.setAttribute('contenteditable', 'false');
+                oppName.setAttribute('contenteditable', 'false');
+                var editBtnStyle = editBtn.getAttribute('class').replace('btn-success', 'btn-info');
+                editBtn.setAttribute('class', editBtnStyle);
+                editBtn.innerHTML = 'Edit';
+            }
+            else {
+                return 0;
+            }
+        }
+    </script>
+</body>
+
+</html>

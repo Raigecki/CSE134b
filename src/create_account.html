@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Create Account</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">
+        <style>
+            body {
+                margin: 5% 5% 5% 5%;
+                font-size: 5rem;
+            }
+
+            body * {
+                margin-bottom: 2rem;
+            }
+
+            #create_header {
+                text-align: center;
+            }
+
+            .form-control {
+                height: 8rem;
+                font-size: 4rem;
+            }
+
+            .dropdown option {
+                font-size: 2rem;
+            }
+
+            h1 {
+                font-size: 7rem;
+            }
+
+            #create_start {
+                width: 100%;
+                font-size: 3rem;
+            }
+
+        </style>
+    </head>
+    <body>
+        <h1 id="create_header">Create Account</h1>
+        <form id="create_account_form" class="form-group">
+            <label for="create_email">Email-Address:</label>
+            <input class="form-control" type="text" name="create_email" id="create_email">
+            <label for="create_password">Password:</label>
+            <input class="form-control" type="password" name="create_password" id="create_password">
+            <label for="create_confirmPassword">Confirm Password:</label>
+            <input class="form-control" type="password" name="create_confirmPassword" id="create_confirmPassword">
+            <label for="create_securityQuestion">Security Question</label>
+            <select id="create_securityQuestion" name="create_securityQuestion" form="create_account_form" class="form-control dropdown">
+                <option value="0" selected disabled>--Select a Security Question--</option>
+                <option value="1">What is your mother's maiden name?</option>
+                <option value="2">Where were you born?</option>
+                <option value="3">Who is your favorite soccer player?</option>
+                <option value="4">What is the name of your first pet?</option>
+                <option value="5">What is your first car?</option>
+            </select>
+            <label for="create_answer">Answer:</label>
+            <input class="form-control" type="text" name="create_answer" id="create_answer">
+            <label for="create_userType">User Type:</label>
+            <select id="create_userType" name="create_userType" form="create_account_form" class="form-control dropdown">
+                <option value="0" selected disabled>What Kind of User Are You?</option>
+                <option value="1">Coach</option>
+                <option value="2">Player</option>
+                <option value="3">Fan</option>
+            </select>
+        </form>
+        <button id="create_start" name="create_start" type="button" form="create_account_form" class="btn btn-success">Start</button>
+    </body>
+</html>
