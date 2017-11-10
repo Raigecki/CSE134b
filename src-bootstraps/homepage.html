@@ -1,0 +1,178 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <title>Home</title>
+    <meta charset="utf-8">
+    <style>
+        body {
+            text-align: center;
+            margin: 7% 2% 2% 2%;
+        }
+
+        #recordTable {
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 2rem;
+            width: 100%;
+            margin-top: 5rem;
+            background-color: rgb(196, 196, 196);
+        }
+
+        #recordTable tr {
+            height: 7rem;
+        }
+
+        #recordTable tr:nth-child(odd) {
+            text-align: left;
+            width: 35%;
+        }
+
+        /* Games Table*/
+
+        .gamesTable{
+            border-collapse: collapse;
+            width: 100%;
+            border: 0;
+        }
+
+        .gamesTable td {
+            width: 33%;
+        }
+
+        .gamesTable img {
+            width: 150px;
+            height: 200px;
+        }
+
+        .gamesTable span{
+            display: block;
+        }  
+
+        .gamesTable h5 {
+
+            font-size: 2rem;
+        }
+
+        #upcomingGamesTable {
+            background-color: rgb(196, 196, 196);
+        }
+
+        /* Recent Games Table*/
+
+        #recentGamesTable tr:nth-child(even) {
+            background-color: rgb(196, 196, 196);
+        }
+
+        .recentMiddleCell {
+            font-size: 4rem;
+        }
+
+        .recentMiddleCellBottom {
+            margin-top: 3rem;
+        }    
+
+        #scoreCell {
+            font-size: 5rem;
+        }
+
+        #timeCell {
+            margin-top: 3rem;
+            font-size: 4rem;
+        }
+
+        h3 {
+            overflow: hidden;
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        h3:before,
+        h3:after {
+            background-color: #000;
+            content: "";
+            display: inline-block;
+            height: 1px;
+            position: relative;
+            vertical-align: middle;
+            width: 50%;
+        }
+
+        h3:before {
+            right: 0.5em;
+            margin-left: -50%;
+        }
+
+        h3:after {
+            left: 0.5em;
+            margin-right: -50%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Logo -->
+    <section>
+        <img src="LAGalaxy.svg">
+    </section>
+    <section>
+        <table id="recordTable">
+            <tr>
+                <td>Team Record:</td>
+                <td id="teamRecordData">10W - 2L - 1T</td>
+                <td>Goals For:</td>
+                <td id="goalsForData">15</td>
+            </tr>
+            <tr>
+                <td>Team Standing</td>
+                <td id="teamStandingData">2nd</td>
+                <td>Goals Against</td>
+                <td id="goalsForData">3</td>
+            </tr>
+        </table>
+
+    </section>
+    <h3>Upcoming/Current Game</h3>
+    <table id="upcomingGamesTable" class="gamesTable">
+        <tr>
+            <td>
+                <img src="LAGalaxy.svg"></br><h5>LA Galaxy</h5>
+            </td>
+            <td><span id="scoreCell">1 - 0</span>
+                </br><span id="timeCell">45: 53</span>
+            </td>
+            <td>
+                <img src="SFDelta.svg"></br><h5>SF Deltas</h5>
+            </td>
+        </tr>
+    </table>
+    <section>
+        <h3>Recent Games</h3>
+        <table id="recentGamesTable" class="gamesTable">
+            <tr>
+                <td>
+                    <img src="LAGalaxy.svg"></br><h5>LA Galaxy</h5>
+                </td>
+                <td><span class="recentMiddleCell">1 - 1</span>
+                    </br><span class="recentMiddleCell recentMiddleCellBottom">Tie</span>
+                </td>
+                <td>
+                    <img src="TorontoFC.svg"></br><h5>Torronto FC</h5>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="LAGalaxy.svg"></br><h5>LA Galaxy</h5>
+                </td>
+                <td><span class="recentMiddleCell">2 - 1</span>
+                    </br><span class="recentMiddleCell recentMiddleCellBottom">W</span>
+                </td>
+                <td>
+                    <img src="MontrealImpact.svg"></br><h5>Montreal Impact</h5>
+                </td>
+            </tr>
+        </table>
+    </section>
+</body>
