@@ -4,7 +4,11 @@
 <head>
   <title>Player Info</title>
   <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">
-  <script src=""></script>
+  <script>
+    function back_to_roster(){
+      location.href = "roster.html";
+    }
+  </script>
   <style>
     li {
       width: 50%;
@@ -23,7 +27,17 @@
     }
 
     img {
+      margin: auto;
       margin-bottom: 1rem;
+    }
+    #rst_btn{
+      width: 50%;
+      margin-bottom: 1rem;
+    }
+    #btn_ct {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 1rem !important;
     }
   </style>
 </head>
@@ -47,7 +61,7 @@
         <a href="">Information</a>
       </li>
       <li>
-        <a href="">Stats</a>
+        <a href="player_stats.html">Stats</a>
       </li>
     </ul>
   </header>
@@ -80,6 +94,9 @@
     <span class="pull-left info-name">Player ID</span>
     <span class="pull-right text-right info-value">P16126065</span>
   </div>
+  <div id="btn_ct" class="container">
+      <button id="rst_btn" type="button" class="btn btn-primary" onclick="back_to_roster()">Back to Roster</button>
+    </div>
 </body>
 
 </html>
