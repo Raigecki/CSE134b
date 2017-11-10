@@ -16,6 +16,10 @@
         font-size: 4rem;
     }
 
+    #menuTabs {
+        margin-bottom: 2rem;
+    }
+
     .nav {
         display: block;
         padding-left: 0;
@@ -86,6 +90,40 @@
         border: 1px solid transparent;
         border-radius: 4px 4px 0 0;
     }
+
+    .nav-pills>li {
+            float: left;
+        }
+
+        .nav-pills>li>a {
+            border-radius: 4px;
+        }
+
+        .nav-pills>li+li {
+            margin-left: 2px;
+        }
+
+        .nav-pills>li.active>a,
+        .nav-pills>li.active>a:hover,
+        .nav-pills>li.active>a:focus {
+            color: #fff;
+            background-color: #337ab7;
+        }
+
+        .nav-justified {
+            width: 100%;
+        }
+
+        .nav-justified>li {
+            display: table-cell;
+            width: 1%;
+            float: none;
+        }
+
+        .nav-justified>li>a {
+            margin-bottom: 5px;
+            text-align: center;
+        }
 
     h2 {
         margin-bottom: 2rem;
@@ -205,16 +243,8 @@
         font-size: 3rem;
     }
 
-    #manageButton {
-        position: absolute;
-        top: 0;
-        right: 0;
-        font-size: 2.5rem;
-        height: 4.5rem;
-        vertical-align: middle;
-        width: 15%;
-        margin-right: 5%;
-        margin-top: 6%;
+    #manageButtons {
+        margin-top: 2rem;
     }
 
     #gamesList_delete option {
@@ -340,8 +370,23 @@
 </style>
 
 <body>
-    <h2>Schedule</h2>
-    <button type="button" class="btn btn-info" id="manageButton" onclick="displayManageOpts()">Manage</button>
+        <ul id="menuTabs" class="nav nav-pills nav-justified">
+                <li>
+                    <a data-toggle="pill" href="homepage.html">Home</a>
+                </li>
+                <li class="active">
+                    <a data-toggle="pill">Schedule</a>
+                </li>
+                <li>
+                    <a data-toggle="pill" href="roster.html">Roster</a>
+                </li>
+                <li>
+                    <a data-toggle="pill" href="input_stats.html">Input</a>
+                </li>
+                <li>
+                    <a data-toggle="pill" href="account_settings.html">Settings</a>
+                </li>
+            </ul>
     <ul class="nav nav-tabs">
         <li class="active">
             <a data-toggle="tab" href="">Ongoing/Upcoming</a>
@@ -350,6 +395,14 @@
             <a data-toggle="tab" href="schedule_previous.html">Previous</a>
         </li>
     </ul>
+    <div id="manageButtons" class="row">
+            <div class="col-xs-6 text-left">
+                <button type="button" id="addGame" class="btn btn-success btn-lg" onclick="displayAddGame()">Add Game</button>
+            </div>
+            <div class="col-xs-6 text-right">
+                <button type="button" id="removeGame" class="btn btn-danger btn-lg" onclick="displayRemoveGame()">Remove Game</button>
+            </div>
+        </div>
     <div class="well row">
         <div class="col-xs-3">
             <p>Team Aztecs</p>
@@ -470,25 +523,6 @@
             <p>(Home)</p>
         </div>
     </div>
-    <!-- Manage Options Modal -->
-    <div id="manageModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span>Manage Games</span>
-                <span id="closeManageGames" class="close">&times;</span>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div id="addGame_container" class="col-xs-6 text-left">
-                        <button type="button" id="addGame" class="btn btn-success" onclick="displayAddGame()">Add Game</button>
-                    </div>
-                    <div id="removeGame_container" class="col-xs-6 text-right">
-                        <button type="button" id="removeGame" class="btn btn-danger" onclick="displayRemoveGame()">Remove Game</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- Add Game Modal -->
     <div id="addGameModal" class="modal">
         <div class="modal-content">
@@ -540,25 +574,13 @@
         </div>
     </div>
     <script>
-        function displayManageOpts() {
-            var manageModal = document.getElementById('manageModal');
-            manageModal.style.display = 'block';
-        }
         function displayAddGame() {
             var addModal = document.getElementById('addGameModal');
-            var manageModal = document.getElementById('manageModal');
-            manageModal.style.display = 'none';
             addModal.style.display = 'block';
         }
         function displayRemoveGame() {
             var deleteModal = document.getElementById('deleteGameModal');
-            var manageModal = document.getElementById('manageModal');
-            manageModal.style.display = 'none';
             deleteModal.style.display = 'block';
-        }
-        document.getElementById('closeManageGames').onclick = function () {
-            var modal = this.parentNode.parentNode.parentNode;
-            modal.style.display = 'none';
         }
         document.getElementById('closeAddGame').onclick = function () {
             var modal = this.parentNode.parentNode.parentNode;
