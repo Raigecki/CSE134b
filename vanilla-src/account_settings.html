@@ -181,7 +181,6 @@
     <!-- Bootstrap styles-->
     <style>
         /* ---------------- Button ---------------- */
-
         .btn {
             display: inline-block;
             padding: 10px 16px;
@@ -247,7 +246,7 @@
         .form-control {
             display: block;
             width: 96%;
-            padding: 6px 12px;
+            padding: 0.5rem 1rem;
             margin-bottom: 2rem;
             height: 5.5rem;
             font-size: 3rem;
@@ -270,7 +269,7 @@
             width: 100%;
         }
 
-        .form-select optgroup {
+        .form-select optgroup:before {
             font-size: 1rem;
         }
 
@@ -293,12 +292,99 @@
         fieldset[disabled] .form-control {
             cursor: not-allowed;
         }
+
+        .nav {
+            display: block;
+            padding-left: 0;
+            margin-bottom: 0;
+            list-style: none;
+        }
+
+        .nav:before,
+        .nav:after {
+            display: table;
+            content: " ";
+        }
+
+        .nav:after,
+            {
+            clear: both;
+        }
+
+        .nav>li {
+            position: relative;
+            display: block;
+        }
+
+        .nav>li>a {
+            position: relative;
+            display: block;
+            text-decoration: none;
+            font-size: 3rem;
+            padding: 10px 15px;
+        }
+
+        .nav>li>a:hover,
+        .nav>li>a:focus {
+            text-decoration: none;
+            background-color: #eee;
+        }
+
+        .nav-pills>li {
+            float: left;
+        }
+
+        .nav-pills>li>a {
+            border-radius: 4px;
+        }
+
+        .nav-pills>li+li {
+            margin-left: 2px;
+        }
+
+        .nav-pills>li.active>a,
+        .nav-pills>li.active>a:hover,
+        .nav-pills>li.active>a:focus {
+            color: #fff;
+            background-color: #337ab7;
+        }
+
+        .nav-justified {
+            width: 100%;
+        }
+
+        .nav-justified>li {
+            display: table-cell;
+            width: 1%;
+            float: none;
+        }
+
+        .nav-justified>li>a {
+            margin-bottom: 5px;
+            text-align: center;
+        }
     </style>
 
 </head>
 
 <body>
-
+    <ul id="menuTabs" class="nav nav-pills nav-justified">
+        <li>
+            <a data-toggle="pill" href="homepage.html">Home</a>
+        </li>
+        <li>
+            <a data-toggle="pill" href="schedule_upcoming.html">Schedule</a>
+        </li>
+        <li>
+            <a data-toggle="pill" href="roster_vanilla.html">Roster</a>
+        </li>
+        <li>
+            <a data-toggle="pill" href="input_stats_vanilla.html">Input</a>
+        </li>
+        <li class="active">
+            <a data-toggle="pill">Settings</a>
+        </li>
+    </ul>
     <h1>Account Settings</h1>
 
     <section>
