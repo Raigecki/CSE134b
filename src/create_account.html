@@ -66,6 +66,11 @@
                 <option value="3">Fan</option>
             </select>
         </form>
-        <button id="create_start" name="create_start" type="button" form="create_account_form" class="btn btn-success">Start</button>
+        <button id="create_start" name="create_start" type="button" form="create_account_form" class="btn btn-success" onclick="goToHome()">Start</button>
+        <script>
+            function goToHome() {
+                location.href = ("homepage.html");
+            }
+        </script>
     </body>
 </html>

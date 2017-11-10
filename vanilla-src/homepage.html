@@ -5,6 +5,7 @@
     <title>Home</title>
     <meta charset="utf-8">
     <style>
+        
         body {
             text-align: center;
             margin: 7% 0 2% 00;
@@ -123,6 +124,18 @@
             margin-right: -50%;
         }
     </style>
+
+    <!-- Tabs Styles -->
+    <style>
+        li > a {
+            font-size: 2rem;
+        }
+
+        #menuTabs {
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+    </style>
 </head>
 
 <body>
@@ -130,6 +143,25 @@
     <!-- Logo -->
     <section>
         <img src="LAGalaxy.svg" class="logo">
+    </section>
+    <section>
+            <ul id="menuTabs" class="nav nav-pills nav-justified">
+                    <li class="active">
+                        <a data-toggle="pill">Home</a>
+                    </li>
+                    <li>
+                        <a data-toggle="pill" href="schedule_upcoming.html">Schedule</a>
+                    </li>
+                    <li>
+                        <a data-toggle="pill" href="roster.html">Roster</a>
+                    </li>
+                    <li>
+                        <a data-toggle="pill" href="input_stats.html">Input</a>
+                    </li>
+                    <li>
+                        <a data-toggle="pill" href="account_settings.html">Settings</a>
+                    </li>
+                </ul>
     </section>
     <section>
         <h3>Current Record</h3>            
@@ -147,7 +179,6 @@
                 <td id="goalsForData">3</td>
             </tr>
         </table>
-
     </section>
     <h3>Upcoming/Current Game</h3>
     <table id="upcomingGamesTable" class="gamesTable">

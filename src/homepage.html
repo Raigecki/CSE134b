@@ -4,31 +4,43 @@
 <head>
     <title>Home</title>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css"> 
     <style>
+        
         body {
             text-align: center;
-            margin: 7% 2% 2% 2%;
+            margin: 7% 0 2% 00;
+            background-color: white;
+            color: #222;
+        }
+
+        .logo {
+            border-radius: 50%;
+            border: 2px solid black;
+            background-color: #42b1b1;
+            padding: 2rem 2rem 2rem 2rem;
         }
 
         #recordTable {
             border-collapse: collapse;
             text-align: left;
-            font-size: 2rem;
+            font-size: 2.5rem;
             width: 100%;
             margin-top: 5rem;
         }
 
         #recordTable tr {
+            padding: 0 2rem 0 2rem;
             height: 7rem;
         }
 
-        #recordTable tr:nth-child(odd) {
+        #recordTable tr :nth-child(odd) {
             text-align: left;
-            width: 35%;
+            padding-left: 1rem;
+            width: 30%;
         }
 
         /* Games Table*/
-
         .gamesTable{
             border-collapse: collapse;
             width: 100%;
@@ -36,7 +48,8 @@
         }
 
         .gamesTable td {
-            width: 33%;
+            width: 33.3%;
+            padding-top: 2rem;
         }
 
         .gamesTable img {
@@ -53,14 +66,18 @@
             font-size: 2rem;
         }
 
-        #upcomingGamesTable {
-            background-color: rgb(196, 196, 196);
+        #upcomingGamesTable tr:hover {
+            background-color: orange;
         }
 
         /* Recent Games Table*/
 
-        #recentGamesTable tr:nth-child(even) {
-            background-color: rgb(196, 196, 196);
+        #recentGamesTable tr {
+            border-bottom: 0.1rem solid #aaa;
+            padding-top: 1rem;
+        }
+        #recentGamesTable tr:hover {
+            background-color: orange;
         }
 
         .recentMiddleCell {
@@ -72,7 +89,7 @@
         }    
 
         #scoreCell {
-            font-size: 5rem;
+            font-size: 4rem;
         }
 
         #timeCell {
@@ -108,15 +125,47 @@
             margin-right: -50%;
         }
     </style>
+
+    <!-- Tabs Styles -->
+    <style>
+        li > a {
+            font-size: 2rem;
+        }
+
+        #menuTabs {
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+    </style>
 </head>
 
 <body>
 
     <!-- Logo -->
     <section>
-        <img src="LAGalaxy.svg">
+        <img src="LAGalaxy.svg" class="logo">
     </section>
     <section>
+            <ul id="menuTabs" class="nav nav-pills nav-justified">
+                    <li class="active">
+                        <a data-toggle="pill">Home</a>
+                    </li>
+                    <li>
+                        <a data-toggle="pill" href="schedule_upcoming.html">Schedule</a>
+                    </li>
+                    <li>
+                        <a data-toggle="pill" href="roster.html">Roster</a>
+                    </li>
+                    <li>
+                        <a data-toggle="pill" href="input_stats.html">Input</a>
+                    </li>
+                    <li>
+                        <a data-toggle="pill" href="account_settings.html">Settings</a>
+                    </li>
+                </ul>
+    </section>
+    <section>
+        <h3>Current Record</h3>            
         <table id="recordTable">
             <tr>
                 <td>Team Record:</td>
@@ -125,25 +174,24 @@
                 <td id="goalsForData">15</td>
             </tr>
             <tr>
-                <td>Team Standing</td>
+                <td>Team Standing:</td>
                 <td id="teamStandingData">2nd</td>
-                <td>Goals Against</td>
+                <td>Goals Against:</td>
                 <td id="goalsForData">3</td>
             </tr>
         </table>
-
     </section>
     <h3>Upcoming/Current Game</h3>
     <table id="upcomingGamesTable" class="gamesTable">
         <tr>
             <td>
-                <img src="LAGalaxy.svg"></br><h5>LA Galaxy</h5>
+                <img src="LAGalaxy.svg" class="logo"></br><h5>LA Galaxy</h5>
             </td>
             <td><span id="scoreCell">1 - 0</span>
                 </br><span id="timeCell">45: 53</span>
             </td>
             <td>
-                <img src="SFDelta.svg"></br><h5>SF Deltas</h5>
+                <img src="SFDelta.svg" class="logo"></br><h5>SF Deltas</h5>
             </td>
         </tr>
     </table>
@@ -152,24 +200,24 @@
         <table id="recentGamesTable" class="gamesTable">
             <tr>
                 <td>
-                    <img src="LAGalaxy.svg"></br><h5>LA Galaxy</h5>
+                    <img src="LAGalaxy.svg" class="logo"></br><h5>LA Galaxy</h5>
                 </td>
                 <td><span class="recentMiddleCell">1 - 1</span>
                     </br><span class="recentMiddleCell recentMiddleCellBottom">Tie</span>
                 </td>
                 <td>
-                    <img src="TorontoFC.svg"></br><h5>Torronto FC</h5>
+                    <img src="TorontoFC.svg" class="logo"></br><h5>Torronto FC</h5>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <img src="LAGalaxy.svg"></br><h5>LA Galaxy</h5>
+                    <img src="LAGalaxy.svg" class="logo"></br><h5>LA Galaxy</h5>
                 </td>
                 <td><span class="recentMiddleCell">2 - 1</span>
                     </br><span class="recentMiddleCell recentMiddleCellBottom">W</span>
                 </td>
                 <td>
-                    <img src="MontrealImpact.svg"></br><h5>Montreal Impact</h5>
+                    <img src="MontrealImpact.svg" class="logo"></br><h5>Montreal Impact</h5>
                 </td>
             </tr>
         </table>
