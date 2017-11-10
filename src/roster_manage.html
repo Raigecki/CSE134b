@@ -34,6 +34,15 @@
       width: 50%;
       text-align: center;
     }
+
+    li > a {
+      font-size: 2.5rem;
+    }
+
+    #menuTabs {
+      margin-bottom: 2rem;
+    }
+
     .navbar-form {
       padding: 1rem;
       margin: 0;
@@ -144,10 +153,15 @@
 
 <body>
   <img src="">
-  <h1 class="ml-5 text-center">Roster</h1>
+  <ul id="menuTabs" class="nav nav-pills nav-justified">
+      <li><a data-toggle="pill" href="homepage.html">Home</a></li>
+      <li><a data-toggle="pill" href="schedule_upcoming.html">Schedule</a></li>
+      <li class="active"><a data-toggle="pill" href="">Roster</a></li>
+      <li><a data-toggle="pill" href="input_stats.html">Input</a></li>
+  </ul>
   <ul class="nav nav-tabs">
     <li>
-      <a href="">Roster</a>
+      <a href="roster.html">Roster</a>
     </li>
     <li class="active">
       <a href="">Manage</a>

@@ -18,6 +18,16 @@
     table {
       margin-bottom: 0 !important;
     }
+
+    #menuTabs {
+      margin-top: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    li > a {
+      font-size: 2.5rem;
+    }
+
     p {
       font-size: 2rem;
     }
@@ -121,6 +131,20 @@
 </head>
 
 <body>
+    <ul id="menuTabs" class="nav nav-pills nav-justified">
+        <li>
+            <a data-toggle="pill" href="homepage.html">Home</a>
+        </li>
+        <li>
+            <a data-toggle="pill" href="schedule_upcoming.html">Schedule</a>
+        </li>
+        <li>
+            <a data-toggle="pill" href="roster.html">Roster</a>
+        </li>
+        <li class="active">
+            <a data-toggle="pill" href="">Input</a>
+        </li>
+    </ul>
   <h1 class="ml-5 text-center">Input Stats</h1>
   <table class="table table-hover table-bordered">
     <tbody>

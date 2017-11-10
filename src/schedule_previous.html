@@ -26,6 +26,14 @@
         width: 50%;
     }
 
+    li > a {
+        font-size: 2.5rem;
+    }
+
+    #menuTabs {
+        margin-bottom: 3rem;
+    }
+
     div p {
         font-size: 2.5rem;
     }
@@ -33,11 +41,23 @@
     .col-xs-3 p:nth-child(2) {
         font-weight: 900;
     }
-
 </style>
 
 <body>
-    <h2>Schedule</h2>
+    <ul id="menuTabs" class="nav nav-pills nav-justified">
+        <li>
+            <a data-toggle="pill" href="homepage.html">Home</a>
+        </li>
+        <li class="active">
+            <a data-toggle="pill" href="">Schedule</a>
+        </li>
+        <li>
+            <a data-toggle="pill" href="roster.html">Roster</a>
+        </li>
+        <li>
+            <a data-toggle="pill" href="input_stats.html">Input</a>
+        </li>
+    </ul>
     <ul class="nav nav-tabs">
         <li>
             <a data-toggle="tab" href="schedule_upcoming.html">Ongoing/Upcoming</a>
