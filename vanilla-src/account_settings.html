@@ -392,24 +392,24 @@
             <h3>Account Information</h3>
         </div>
         <div class="sectionEntry">
-            <label for="email">E-mail Address:</label>
+            <label>E-mail Address:</label>
             <p>
                 <span class="entry" id="email">stevendanieledwin@ucsd.edu</span>
-                <img id="changeEmail" src="edit.svg"></img>
+                <img id="changeEmail" alt="edit" src="edit.svg">
             </p>
         </div>
         <div class="sectionEntry">
-            <label for="password">Password:</label>
+            <label>Password:</label>
             <p>
                 <span class="entry" id="password">*****</span>
-                <img id="changePassword" src="edit.svg"></img>
+                <img id="changePassword" alt="edit" src="edit.svg">
             </p>
         </div>
         <div class="sectionEntry">
-            <label for="security">Security Question:</label>
+            <label>Security Question:</label>
             <p>
                 <span class="entry" id="security">What is your mother's maiden name?</span>
-                <img id="changeSecurity" src="edit.svg"></img>
+                <img id="changeSecurity" alt="edit" src="edit.svg">
             </p>
         </div>
     </section>
@@ -426,7 +426,7 @@
 
                     <label for="securityQuestion">Security Question:</label>
                     <select id="securityQuestion" name="securityQuestion" class="form-control form-select">
-                        <optgroup>
+                        <optgroup label="security question group">
                             <option value="0" selected disabled>-- Select a Security Question--</option>
                             <option value="1">What is your mother's maiden name?</option>
                             <option value="2">Where were you born?</option>
@@ -437,12 +437,12 @@
                     </select>
 
                     <label for="answer">Answer:</label>
-                    <input type="text" name="answer" class="form-control">
+                    <input type="text" name="answer" id="answer" class="form-control">
 
-                    <label for="password">New E-mail:</label>
-                    <input type="password" name="password" class="form-control">
+                    <label for="password1">New E-mail:</label>
+                    <input type="password" name="password1" id="password1" class="form-control">
 
-                    <input type="submit" id="changeEmailSubmit" name="changeEmailSubmit" class="btn" value="Change E-mail"></input>
+                    <input type="submit" id="changeEmailSubmit" name="changeEmailSubmit" class="btn" value="Change E-mail">
                 </form>
 
             </div>
@@ -465,9 +465,9 @@
 
                 <form id="changePasswordForm" method="post" enctype="multipart/form-data" onsubmit="return validateForm();">
 
-                    <label for="securityQuestion">Security Question:</label>
-                    <select id="securityQuestion" name="securityQuestion" class="form-control form-select">
-                        <optgroup>
+                    <label for="securityQuestion1">Security Question:</label>
+                    <select id="securityQuestion1" name="securityQuestion1" class="form-control form-select">
+                        <optgroup label="security questions">
                             <option value="0" selected disabled>-- Select a Security Question--</option>
                             <option value="1">What is your mother's maiden name?</option>
                             <option value="2">Where were you born?</option>
@@ -477,15 +477,15 @@
                         </optgroup>
                     </select>
 
-                    <label for="answer">Answer:</label>
-                    <input type="text" name="answer" class="form-control">
+                    <label for="answer1">Answer:</label>
+                    <input type="text" name="answer1" id="answer1" class="form-control">
                     <label for="currentPassword">Current Password:</label>
-                    <input type="password" name="currentPassword" class="form-control">
+                    <input type="password" name="currentPassword" id="currentPassword" class="form-control">
                     <label for="newPassword">New Password:</label>
-                    <input type="password" name="newPassword" class="form-control">
+                    <input type="password" name="newPassword" id="newPassword" class="form-control">
                     <label for="confirmPassword">Confirm Password:</label>
-                    <input type="password" name="confirmPassword" class="form-control">
-                    <input type="submit" id="changePasswordSubmit" name="changePasswordSubmit" class="btn" value="Change Password"></input>
+                    <input type="password" name="confirmPassword" id="confirmPassword" class="form-control">
+                    <input type="submit" id="changePasswordSubmit" name="changePasswordSubmit" class="btn" value="Change Password">
                 </form>
 
             </div>
@@ -510,7 +510,7 @@
 
                     <label for="currentSecurityQuestion">Security Question:</label>
                     <select id="currentSecurityQuestion" name="currentSecurityQuestion" class="form-control form-select">
-                        <optgroup>
+                        <optgroup label="curretn security questions">
                             <option value="0" selected disabled>-- Select a Security Question--</option>
                             <option value="1">What is your mother's maiden name?</option>
                             <option value="2">Where were you born?</option>
@@ -521,11 +521,11 @@
                     </select>
 
                     <label for="currentAnswer">Answer:</label>
-                    <input type="text" name="currentAnswer" class="form-control">
+                    <input type="text" name="currentAnswer" id="currentAnswer" class="form-control">
 
                     <label for="newSecurityQuestion">Security Question:</label>
                     <select id="newSecurityQuestion" name="currentSecurityQuestion" class="form-control form-select">
-                        <optgroup>
+                        <optgroup label="new security questions">
                             <option value="0" selected disabled>-- Select a Security Question--</option>
                             <option value="1">What is your mother's maiden name?</option>
                             <option value="2">Where were you born?</option>
@@ -536,12 +536,12 @@
                     </select>
 
                     <label for="newAnswer">Answer:</label>
-                    <input type="text" name="newAnswer" class="form-control">
+                    <input type="text" name="newAnswer" id="newAnswer" class="form-control">
 
-                    <label for="password">New Password:</label>
-                    <input type="password" name="password" class="form-control">
+                    <label for="password3">New Password:</label>
+                    <input type="password" name="password3" id="password3" class="form-control">
 
-                    <input type="submit" id="changeSecuritySubmit" name="changeSecuritySubmit" class="btn" value="Update"></input>
+                    <input type="submit" id="changeSecuritySubmit" name="changeSecuritySubmit" class="btn" value="Update">
                 </form>
 
             </div>
@@ -591,8 +591,5 @@
 
 
 </body>
-
-<footer>
-</footer>
 
 </html>
