@@ -3,7 +3,21 @@
 
 <head>
   <title>Player Stats</title>
+  <script>
+      function back_to_roster(){
+        location.href = "roster_vanilla.html";
+      }
+    </script>
   <style>
+      #rstr_btn {
+        margin: auto;
+        width: 50%;
+      }
+      #btn_ctn {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 1rem !important;
+      }
     /*Bootstrap C&P*/
     * {
       -webkit-box-sizing: border-box;
@@ -664,10 +678,10 @@
       </div>
     </form>
     <h1>John Smith</h1>
-    <img class="img-responsive img-circle" src="../src/john_smith.jpg">
+    <img class="img-responsive img-circle" alt="Player picture" src="../src/john_smith.jpg">
     <ul class="nav nav-tabs">
       <li>
-        <a href="">Information</a>
+        <a href="player_info_vanilla.html">Information</a>
       </li>
       <li class="active">
         <a href="">Stats</a>
@@ -720,6 +734,9 @@
       </tr>
     </tbody>
   </table>
+  <div id="btn_ctn" class="container">
+      <button id="rstr_btn" type="button" class="btn btn-primary" onclick="back_to_roster()">Back to Roster</button>
+    </div>
 </body>
 
 </html>

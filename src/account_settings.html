@@ -200,21 +200,21 @@
             <h3>Account Information</h3>
         </div>
         <div class="sectionEntry">
-            <label for="email">E-mail Address:</label>
+            <label>E-mail Address:</label>
             <p>
                 <span class="entry">stevendanieledwin@ucsd.edu</span>
                 <span id="changeEmail" class="glyphicon glyphicon-pencil"></span>
             </p>
         </div>
         <div class="sectionEntry">
-            <label for="password">Password:</label>
+            <label>Password:</label>
             <p>
                 <span class="entry">*****</span>
                 <span id="changePassword" class="glyphicon glyphicon-pencil"></span>
             </p>
         </div>
         <div class="sectionEntry">
-            <label for="security">Security Question:</label>
+            <label>Security Question:</label>
             <p>
                 <span class="entry">What is your mother's maiden name?</span>
                 <span id="changeSecurity" class="glyphicon glyphicon-pencil"></span>
@@ -246,12 +246,12 @@
                     <label for="answer">Answer:</label>
                     <input type="text" name="answer" class="form-control">
                     <label for="currentPassword">Current Password:</label>
-                    <input type="password" name="currentPassword" class="form-control">
+                    <input type="password" name="currentPassword" id="currentPassword" class="form-control">
                     <label for="newPassword">New Password:</label>
-                    <input type="password" name="newPassword" class="form-control">
+                    <input type="password" name="newPassword" id="newPassword" class="form-control">
                     <label for="confirmPassword">Confirm Password:</label>
-                    <input type="password" name="confirmPassword" class="form-control">
-                    <input type="submit" id="changePasswordSubmit" name="changePasswordSubmit" class="btn" value="Change Password"></input>
+                    <input type="password" name="confirmPassword" id="confirmPassword" class="form-control">
+                    <input type="submit" id="changePasswordSubmit" name="changePasswordSubmit" class="btn" value="Change Password">
                 </form>
 
             </div>
@@ -285,7 +285,7 @@
                     </select>
 
                     <label for="currentAnswer">Answer:</label>
-                    <input type="text" name="currentAnswer" class="form-control">
+                    <input type="text" name="currentAnswer" id="currentAnswer" class="form-control">
 
                     <label for="newSecurityQuestion">Security Question:</label>
                     <select id="newSecurityQuestion" name="currentSecurityQuestion" class="form-control">
@@ -298,12 +298,12 @@
                     </select>
 
                     <label for="newAnswer">Answer:</label>
-                    <input type="text" name="newAnswer" class="form-control">
+                    <input type="text" name="newAnswer" id="newAnswer" class="form-control">
 
                     <label for="password">New Password:</label>
-                    <input type="password" name="password" class="form-control">
+                    <input type="password" name="password" id="password" class="form-control">
 
-                    <input type="submit" id="changeSecuritySubmit" name="changeSecuritySubmit" class="btn" value="Update"></input>
+                    <input type="submit" id="changeSecuritySubmit" name="changeSecuritySubmit" class="btn" value="Update">
                 </form>
 
             </div>
@@ -325,8 +325,8 @@
             <div class="modal-body">
                 <form id="changeEmailForm" method="post" enctype="multipart/form-data" onsubmit="return validateForm();">
 
-                    <label for="securityQuestion">Security Question:</label>
-                    <select id="securityQuestion" name="securityQuestion" class="form-control">
+                    <label for="securityQuestion1">Security Question:</label>
+                    <select id="securityQuestion1" name="securityQuestion1" class="form-control">
                         <option value="0" selected disabled>-- Select a Security Question--</option>
                         <option value="1">What is your mother's maiden name?</option>
                         <option value="2">Where were you born?</option>
@@ -336,12 +336,12 @@
                     </select>
 
                     <label for="answer">Answer:</label>
-                    <input type="text" name="answer" class="form-control">
+                    <input type="text" name="answer" id="answer" class="form-control">
 
-                    <label for="password">New Password:</label>
-                    <input type="password" name="password" class="form-control">
+                    <label for="password1">New Password:</label>
+                    <input type="password" name="password1" id="password1" class="form-control">
 
-                    <input type="submit" id="changeEmailSubmit" name="changeEmailSubmit" class="btn" value="Change E-mail"></input>
+                    <input type="submit" id="changeEmailSubmit" name="changeEmailSubmit" class="btn" value="Change E-mail">
                 </form>
 
             </div>
@@ -389,8 +389,5 @@
 
 
 </body>
-
-<footer>
-</footer>
 
 </html>
