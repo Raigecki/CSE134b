@@ -3,7 +3,7 @@
 
 <head>
   <title>Roster</title>
-  <script src="roster_vanilla.html"></script>
+  <script src="CRUD_roster.js"></script>
   <script>
     function link_to_playerinfo() {
       location.href = ("../vanilla-src/player_info_vanilla.html")
@@ -1063,7 +1063,7 @@
               <h4 class="modal-title">Add a Player</h4>
             </div>
             <div class="modal-body">
-              <form>
+              <form id="addPlayerForm" onsubmit="confirmAddPlayer">
                 <input class="form-control" type="text" name="name" placeholder="Name">
                 <input class="form-control" type="text" name="position" placeholder="Postion">
                 <input class="form-control" type="number" name="number" placeholder="Number">
@@ -1091,7 +1091,7 @@
               <h4 class="modal-title">Remove a Player</h4>
             </div>
             <div class="modal-body">
-                <table class="table table-hover table-bordered">
+                <table id="playerTable" class="table table-hover table-bordered">
                     <tbody>
                       <tr>
                         <td onclick="close_remove_modal()">
@@ -1108,91 +1108,86 @@
                           </div>
                         </td>
                       </tr>
-                      <tr>
-                        <td onclick="close_remove_modal()">
-                          <div id="player_6" class="container">
-                            <div class="row">
-                              <div class="col-xs-4 text-center">
-                                <img class="img-responsive img-circle center-block" alt="Player picture" src="../src/john_smith.jpg"> 6
-                              </div>
-                              <div class="col-xs-8 text-right">
-                                <p>Joe McDonald</p>
-                                <p>Forward</p>
-                              </div>
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td onclick="close_remove_modal()">
-                          <div class="container">
-                            <div class="row">
-                              <div class="col-xs-4 text-center">
-                                <img class="img-responsive img-circle center-block" alt="Player picture" src="../src/john_smith.jpg"> 17
-                              </div>
-                              <div class="col-xs-8 text-right">
-                                <p>Jack Williams</p>
-                                <p>Mid-Field</p>
-                              </div>
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td onclick="close_remove_modal()">
-                          <div class="container">
-                            <div class="row">
-                              <div class="col-xs-4 text-center">
-                                <img class="img-responsive img-circle center-block" alt="Player picture" src="../src/john_smith.jpg"> 8
-                              </div>
-                              <div class="col-xs-8 text-right">
-                                <p>Daniel Jackson</p>
-                                <p>Mid-Field</p>
-                              </div>
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td onclick="close_remove_modal()">
-                          <div class="container">
-                            <div class="row">
-                              <div class="col-xs-4 text-center">
-                                <img class="img-responsive img-circle center-block" alt="Player picture" src="../src/john_smith.jpg"> 13
-                              </div>
-                              <div class="col-xs-8 text-right">
-                                <p>Zachary Eason</p>
-                                <p>Defense</p>
-                              </div>
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td onclick="close_remove_modal()">
-                          <div class="container">
-                            <div class="row">
-                              <div class="col-xs-4 text-center">
-                                <img class="img-responsive img-circle center-block" alt="Player picture" src="../src/john_smith.jpg"> 28
-                              </div>
-                              <div class="col-xs-8 text-right">
-                                <p>Robert Redder</p>
-                                <p>Defense</p>
-                              </div>
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
                     </tbody>
                   </table>
             </div>
           </div>
       </div>
   </div>
+
+  <template>
+      <tr>
+          <td onclick="close_remove_modal()">
+            <div id="player_5" class="container">
+              <div class="row">
+                <div class="col-xs-4 text-center">
+                  <img class="img-responsive img-circle center-block" alt="Player picture" src="../src/john_smith.jpg"> 76
+                </div>
+                <div class="col-xs-8 text-right">
+                  <p>John Smith</p>
+                  <p>Forward</p>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+  </template>
+
+  <!-- Modal Scripts-->
   <script>
     var values = document.getElementsByClassName('editable');
     for(var i=0;i < values.length; i++){
       values.item(i).setAttribute("contenteditable","true");
+    }
+  </script>
+
+  <!-- CRUD Scripts -->
+  <script>
+    function confirmAddPlayer() {
+      
+      var form = document.getElementById('addPlayerForm');
+      var name = form.children[0];
+      var pos = form.children[1];
+      var num = form.children[2];
+      var status = form.children[3];
+      var college = form.children[4];
+      var hometown = form.children[5];
+      var age = form.children[6];
+      var dob = form.children[7];
+      var pid = form.children[8];
+
+      createPlayer(name, pos, num, status, college, hometown, age, dob, pid);
+    }
+  </script>
+
+  <!-- Helper Scripts-->
+  <script>
+    function createPlayerRow(player) {
+
+      var playerTable = document.getElementById('playerTable');
+      var index = playerTable.childElementCount - 1;
+
+      tr = document.createElement('tr');
+      td = document.createElement('td');
+      playerContainer = document.createElement('div');
+      playerRow = document.createElement('div');
+      imgContainer = document.createElement('div');
+      profileImg = document.createElement('img');
+      textContainer = document.createElement('div');
+      name = document.createElement('p');
+      pos = document.createElement('p');
+
+      td.setAttribute('onclick', 'link_to_playerinfo()');
+      playerContainer.setAttribute('data-index', index);
+      playerContainer.setAttribute('class', 'container');
+      playerRow.setAttribute('class', 'row');
+      imgContainer.setAttribute('class', 'col-xs-4 text-center');
+      profileImg.setAttribute('class', 'img-responsive img-circle center-block');
+      profileImg.setAttribute('alt', 'Player picture');
+      //need img src
+      textContainer.setAttribute('class', 'col-xs-8 text-right');
+      name.append(document.createTextNode(player.name));
+      pos.append(document.createTextNode(player.pos));
     }
   </script>
 </body>
