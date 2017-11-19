@@ -104,6 +104,36 @@
     <button id="create_start" name="create_start" type="button" form="create_account_form" class="btn btn-success" onclick="goToHome()">Start</button>
     <script>
         function goToHome() {
+            //TODO: add check to see if local storage is available
+            //TODO: check if user has inputted correct stuff in form
+            //properties of user: email, password, type, security question, security answer
+            var users = [];
+            var backUserList = localStorage.getItem('userList');
+            if (backUserList != undefined) {
+                users = JSON.parse(backUserList);
+            }
+            var emailAddr = document.getElementById('create_email').value;
+
+            //check for duplicate emails
+            for (var index = 0; index < users.length; index++) {
+                if (users[index].email == emailAddr) {
+                    alert('Account with the same email address already exists');
+                    return 0;
+                }
+            }
+
+            var createUser = {};
+            var securityQ = document.getElementById('create_securityQuestion');
+            var userType = document.getElementById('create_userType');
+            createUser['email'] = emailAddr;
+            createUser['password'] = document.getElementById('create_password').value;
+            createUser['question'] = securityQ.options[securityQ.selectedIndex].text;
+            createUser['answer'] = document.getElementById('create_answer').value;
+            createUser['type'] = userType.options[userType.selectedIndex].text;
+            users.push(createUser);
+            localStorage.setItem('userList', JSON.stringify(users));
+            localStorage.setItem('currentUser', JSON.stringify(createUser));
+            
             location.href = ("homepage.html");
         }
     </script>
