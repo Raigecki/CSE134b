@@ -15,6 +15,16 @@
             color: #444;
         }
 
+        #pageBody {
+            margin-bottom: 8rem;
+        } 
+
+        #pageFooter {
+            position: absolute;
+            bottom: 5%;
+            width: 94%;
+        }
+
         #submitButton {
             height: 10rem;
             font-size: 5rem;
@@ -71,6 +81,10 @@
         div label {
             font-size: 3rem;
             font-weight: bold;
+        }
+
+        #logoutButton {
+            background-color: red;
         }
     </style>
 
@@ -370,7 +384,7 @@
     </ul>
     <h1>Account Settings</h1>
 
-    <section>
+    <section id="pageBody">
         <div class="sectionTitle">
             <h3>Account Information</h3>
         </div>
@@ -395,6 +409,9 @@
                 <img id="changeSecurity" alt="edit" src="edit.svg">
             </p>
         </div>
+    </section>
+    <section id="pageFooter">
+        <button id='logoutButton' class='btn btn-lg' onclick="logout()">Logout</button>            
     </section>
 
     <!-- Change Email Modal -->
@@ -529,15 +546,11 @@
 
             </div>
             <!-- modal body div -->
-
             <div class="modal-footer">
             </div>
         </div>
         <!-- content div -->
     </div>
-
-
-
 
     <!-- Modal Script -->
     <script>
@@ -569,7 +582,23 @@
             var modal = this.parentNode.parentNode.parentNode;
             modal.style.display = 'none';
         }
+    </script>
 
+    <!-- General Scripts -->
+    <script>
+    
+        function logout() {
+
+            var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            currentUser['email'] = undefined;
+            currentUser['password'] = undefined;
+            currentUser['question'] = undefined;
+            currentUser['answer'] = undefined;
+            currentUser['type'] = undefined;
+
+            localStorage.setItem(JSON.stringify('currentUser', currentUser));
+            location.href = ("login_vanilla.html");
+        }
     </script>
 
 
