@@ -17,7 +17,7 @@
 
         #pageBody {
             margin-bottom: 8rem;
-        } 
+        }
 
         #pageFooter {
             position: absolute;
@@ -184,6 +184,7 @@
     <!-- Bootstrap styles-->
     <style>
         /* ---------------- Button ---------------- */
+
         .btn {
             display: inline-block;
             padding: 10px 16px;
@@ -303,8 +304,7 @@
             content: " ";
         }
 
-        .nav:after
-            {
+        .nav:after {
             clear: both;
         }
 
@@ -411,7 +411,7 @@
         </div>
     </section>
     <section id="pageFooter">
-        <button id='logoutButton' class='btn btn-lg' onclick="logout()">Logout</button>            
+        <button id='logoutButton' class='btn btn-lg' onclick="logout()">Logout</button>
     </section>
 
     <!-- Change Email Modal -->
@@ -586,17 +586,19 @@
 
     <!-- General Scripts -->
     <script>
-    
+
         function logout() {
 
-            var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-            currentUser['email'] = undefined;
-            currentUser['password'] = undefined;
-            currentUser['question'] = undefined;
-            currentUser['answer'] = undefined;
-            currentUser['type'] = undefined;
+            if (localStorage.getItem('currentUser') != undefined) {
+                var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                currentUser['email'] = undefined;
+                currentUser['password'] = undefined;
+                currentUser['question'] = undefined;
+                currentUser['answer'] = undefined;
+                currentUser['type'] = undefined;
+            }
 
-            localStorage.setItem(JSON.stringify('currentUser', currentUser));
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
             location.href = ("login_vanilla.html");
         }
     </script>
