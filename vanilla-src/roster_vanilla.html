@@ -120,6 +120,7 @@
 
     html {
       font-family: sans-serif;
+      font-size: 10px;
       -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
     }
@@ -253,14 +254,15 @@
     .form-control {
       display: block;
       width: 100%;
-      height: 34px;
+      height: 8rem;
+      font-size: 5rem;
       padding: 6px 12px;
-      font-size: 14px;
-      line-height: 1.42857143;
-      color: #555;
+      line-height: 5rem;
+      margin-top: 1rem;
+      color: rgb(68, 68, 68);
       background-color: #fff;
       background-image: none;
-      border: 1px solid #ccc;
+      border: 1px solid rgb(99, 99, 99);
       border-radius: 4px;
       -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
       box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
@@ -273,9 +275,10 @@
       display: inline-block;
       padding: 6px 12px;
       margin-bottom: 0;
-      font-size: 14px;
+      font-size: 5rem;
+      height: 8rem;
       font-weight: normal;
-      line-height: 1.42857143;
+      line-height: 5rem;
       text-align: center;
       white-space: nowrap;
       vertical-align: middle;
@@ -961,96 +964,6 @@
           <button type="button" class="btn btn-primary fourty pull-right" onclick="show_remove_modal()">Remove a player</button>
         </td>
       </tr>
-      <tr>
-        <td onclick="link_to_playerinfo()">
-          <div id="player_1" class="container">
-            <div class="row">
-              <div class="col-xs-4 text-center">
-                <img class="img-responsive img-circle center-block" alt="Player picture" src="../src/john_smith.jpg"> 76
-              </div>
-              <div class="col-xs-8 text-right">
-                <p>John Smith</p>
-                <p>Forward</p>
-              </div>
-            </div>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td onclick="link_to_playerinfo()">
-          <div id="player_2" class="container">
-            <div class="row">
-              <div class="col-xs-4 text-center">
-                <img class="img-responsive img-circle center-block" alt="Player picture" src="../src/john_smith.jpg"> 6
-              </div>
-              <div class="col-xs-8 text-right">
-                <p>Joe McDonald</p>
-                <p>Forward</p>
-              </div>
-            </div>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td onclick="link_to_playerinfo()">
-          <div class="container">
-            <div class="row">
-              <div class="col-xs-4 text-center">
-                <img class="img-responsive img-circle center-block" alt="Player picture" src="../src/john_smith.jpg"> 17
-              </div>
-              <div class="col-xs-8 text-right">
-                <p>Jack Williams</p>
-                <p>Mid-Field</p>
-              </div>
-            </div>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td onclick="link_to_playerinfo()">
-          <div class="container">
-            <div class="row">
-              <div class="col-xs-4 text-center">
-                <img class="img-responsive img-circle center-block" alt="Player picture" src="../src/john_smith.jpg"> 8
-              </div>
-              <div class="col-xs-8 text-right">
-                <p>Daniel Jackson</p>
-                <p>Mid-Field</p>
-              </div>
-            </div>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td onclick="link_to_playerinfo()">
-          <div class="container">
-            <div class="row">
-              <div class="col-xs-4 text-center">
-                <img class="img-responsive img-circle center-block" alt="Player picture" src="../src/john_smith.jpg"> 13
-              </div>
-              <div class="col-xs-8 text-right">
-                <p>Zachary Eason</p>
-                <p>Defense</p>
-              </div>
-            </div>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td onclick="link_to_playerinfo()">
-          <div class="container">
-            <div class="row">
-              <div class="col-xs-4 text-center">
-                <img class="img-responsive img-circle center-block" alt="Player picture" src="../src/john_smith.jpg"> 28
-              </div>
-              <div class="col-xs-8 text-right">
-                <p>Robert Redder</p>
-                <p>Defense</p>
-              </div>
-            </div>
-          </div>
-        </td>
-      </tr>
     </tbody>
   </table>
   <div class="container">
@@ -1063,7 +976,7 @@
               <h4 class="modal-title">Add a Player</h4>
             </div>
             <div class="modal-body">
-              <form id="addPlayerForm" onsubmit="confirmAddPlayer">
+              <form id="addPlayerForm">
                 <input class="form-control" type="text" name="name" placeholder="Name">
                 <input class="form-control" type="text" name="position" placeholder="Postion">
                 <input class="form-control" type="number" name="number" placeholder="Number">
@@ -1076,7 +989,7 @@
               </form>
             </div>
             <div class="modal-footer">
-              <button id="save_btn" type="button" class="btn btn-primary" onclick="close_add_modal()">Save</button>
+              <button id="save_btn" type="button" class="btn btn-primary" onclick="confirmAddPlayer()">Save</button>
             </div>
           </div>
       </div>
@@ -1115,7 +1028,7 @@
       </div>
   </div>
 
-  <template>
+  <template id="playerTemplate">
       <tr>
           <td onclick="close_remove_modal()">
             <div id="player_5" class="container">
@@ -1144,7 +1057,7 @@
   <!-- CRUD Scripts -->
   <script>
     function confirmAddPlayer() {
-      
+      var playerTable = document.getElementById('playerTable');
       var form = document.getElementById('addPlayerForm');
       var name = form.children[0];
       var pos = form.children[1];
@@ -1156,7 +1069,14 @@
       var dob = form.children[7];
       var pid = form.children[8];
 
-      createPlayer(name, pos, num, status, college, hometown, age, dob, pid);
+      var player = createPlayer(name, pos, num, status, college, hometown, age, dob, pid);
+      var playerRow = createPlayerRow(player);
+      playerTable.appendChild(playerRow);
+
+      var backRoster = JSON.parse(localStorage.getItem('Roster'));
+      backRoster.push(player);
+      localStorage.setItem('Roster', JSON.stringify(backRoster));
+      close_add_modal();
     }
   </script>
 
@@ -1164,30 +1084,27 @@
   <script>
     function createPlayerRow(player) {
 
+      var playerTemplate = document.getElementById('playerTemplate');
+
       var playerTable = document.getElementById('playerTable');
       var index = playerTable.childElementCount - 1;
 
-      tr = document.createElement('tr');
-      td = document.createElement('td');
-      playerContainer = document.createElement('div');
-      playerRow = document.createElement('div');
-      imgContainer = document.createElement('div');
-      profileImg = document.createElement('img');
-      textContainer = document.createElement('div');
-      name = document.createElement('p');
-      pos = document.createElement('p');
-
+      var td = playerTemplate.content.children[0].children[0];
       td.setAttribute('onclick', 'link_to_playerinfo()');
-      playerContainer.setAttribute('data-index', index);
-      playerContainer.setAttribute('class', 'container');
-      playerRow.setAttribute('class', 'row');
-      imgContainer.setAttribute('class', 'col-xs-4 text-center');
-      profileImg.setAttribute('class', 'img-responsive img-circle center-block');
-      profileImg.setAttribute('alt', 'Player picture');
-      //need img src
-      textContainer.setAttribute('class', 'col-xs-8 text-right');
-      name.append(document.createTextNode(player.name));
-      pos.append(document.createTextNode(player.pos));
+
+      //container div
+      td.children[0].setAttribute('data-index', index);
+
+      //img
+      td.children[0].children[0].children[0].children[0].setAttribute('alt', 'Player picture');
+
+      //player p tags
+      td.children[0].children[0].children[1].children[0].append(document.createTextNode(player.name));
+      td.children[0].children[0].children[1].children[1].append(document.createTextNode(player.pos));
+
+      var clone = document.importNode(playerTemplate.content, true);
+      console.log(clone);
+      return clone;
     }
   </script>
 </body>

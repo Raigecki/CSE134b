@@ -12,8 +12,11 @@ function initializeRoster(amount) {
         var stat = (i % 2 == 1) ? 'Stater' : 'Bench-warmer';
         var now = new Date();
         var dob = now.getMonth() + '/' + now.getDate() + '/' + now.getFullYear();
+        var img = document.createElement('img');
+        img.alt = 'Player Icon';
 
         var player = {
+            img: img,
             number: i,
             name: 'Player ' + i,
             status: stat,
@@ -36,9 +39,14 @@ function removeRoster() {
     localStorage.removeItem('Roster');
 }
 
-function createPlayer(inputName, pos, num, stat, college, home, age, dob, pid) {
+function getRoster() {
+    return JSON.parse(localStorage.getItem('Roster'));
+}
+
+function createPlayer(img, inputName, pos, num, stat, college, home, age, dob, pid) {
 
     var player = {
+        img: img,
         number: num,
         name: inputName,
         status: stat,
@@ -49,10 +57,6 @@ function createPlayer(inputName, pos, num, stat, college, home, age, dob, pid) {
         DOB: dob,
         ID: pid
     }
-
-    var backRoster = JSON.parse(localStorage.getItem('Roster'));
-    backRoster.push(player);
-    localStorage.setItem('Roster', JSON.stringify(backRoster));
     return player;
 }
 
@@ -80,18 +84,18 @@ function deletePlayerByNumber(num) {
     else deletePlayerByIndex(index);
 }
 
-function deletePlayerByName(inputName) {
+function deletePlayerById(inputId) {
 
     index = -1;
 
     for (var i = 0; i < backRoster.length; i++) {
 
-        if (backRoster[i].name == inputName) {
+        if (backRoster[i].pid == inputId) {
 
             index = i;
             break;
         }
     }
-    if (index == -1) alert('The player with name ' + name + ' cannot be found');
+    if (index == -1) alert('The player with ID ' + inputId + ' cannot be found');
     else deletePlayerByIndex(index);
 }
