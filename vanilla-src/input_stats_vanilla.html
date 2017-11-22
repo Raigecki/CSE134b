@@ -4,15 +4,21 @@
 <head>
   <title>Input Stats</title>
   <script>
-    function show_modal() {
+    function show_modal(n) {
+      viewStats(n);
       var modal = document.getElementById('myModal');
       modal.style.display = 'block';
     }
+    /*function show_modal() {
+      var modal = document.getElementById('myModal');
+      modal.style.display = 'block';
+    }*/
     function close_modal() {
       var modal = document.getElementById('myModal');
       modal.style.display = 'none';
     }
   </script>
+  <script src="CRUD_roster.js"></script>
   <style>
     /*Bootstrap C&P */
 
@@ -878,15 +884,17 @@
     /* The Close Button */
 
     .close {
-      color: white;
+      color: black;
       float: right;
       font-size: 3rem;
       font-weight: bold;
+      height: 3rem;
+      background-color: #42b1b1
     }
 
     .close:hover,
     .close:focus {
-      color: #000;
+      color: red;
       text-decoration: none;
       cursor: pointer;
     }
@@ -930,13 +938,14 @@
   </ul>
   <h1 class="ml-5 text-center">Input Stats</h1>
   <table class="table table-hover table-bordered">
-    <tbody>
+    <tbody id='IStbody'><!--
       <tr>
         <td>
           <div id="player_1" class="container" onClick="show_modal()">
             <div class="row">
               <div class="col-xs-4 text-center">
-                <img class="img-responsive img-circle center-block" alt="Player picture" src="../src/john_smith.jpg"> 76
+                <img class="img-responsive img-circle center-block" alt="Player picture" src="../src/john_smith.jpg">
+                <span>76</span>
               </div>
               <div class="col-xs-8 text-right">
                 <p>John Smith</p>
@@ -1021,6 +1030,7 @@
           </div>
         </td>
       </tr>
+    -->
     </tbody>
   </table>
   <div class="container">
@@ -1043,39 +1053,39 @@
             <tbody>
               <tr>
                 <td>Fouls</td>
-                <td class="editable">6</td>
+                <td id="fouls" class="editable">6</td>
               </tr>
               <tr>
                 <td>Red cards</td>
-                <td class="editable">0</td>
+                <td id="redCards" class="editable">0</td>
               </tr>
               <tr>
                 <td>Yellow cards</td>
-                <td class="editable">2</td>
+                <td id="yellowCards" class="editable">2</td>
               </tr>
               <tr>
                 <td>Shots on goal</td>
-                <td class="editable">12</td>
+                <td id="shotsOnGoal" class="editable">12</td>
               </tr>
               <tr>
                 <td>Goals</td>
-                <td class="editable">7</td>
+                <td id="goals" class="editable">7</td>
               </tr>
               <tr>
                 <td>Corner kicks taken</td>
-                <td class="editable">0</td>
+                <td id="cKicks" class="editable">0</td>
               </tr>
               <tr>
                 <td>Penalty kicks taken</td>
-                <td class="editable">2</td>
+                <td id="pKicks" class="editable">2</td>
               </tr>
               <tr>
                 <td>Throw-ins</td>
-                <td class="editable">6</td>
+                <td id="tIns" class="editable">6</td>
               </tr>
               <tr>
                 <td>Appearances</td>
-                <td class="editable">10</td>
+                <td id="appearances" class="editable">10</td>
               </tr>
             </tbody>
           </table>
@@ -1086,7 +1096,26 @@
       </div>
     </div>
   </div>
+  <template id="playerTemplate">
+    <tr>
+      <td>
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-4 text-center">
+              <img class="img-responsive img-circle center-block" alt="Player picture" src="../src/john_smith.jpg">
+              <span></span>
+            </div>
+            <div class="col-xs-8 text-right">
+              <p></p>
+              <p></p>
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </template>
   <script>
+    initializeInputStats();
     var values = document.getElementsByClassName('editable');
     for (var i = 0; i < values.length; i++) {
       values.item(i).setAttribute("contenteditable", "true");

@@ -4,12 +4,19 @@
 <head>
   <title>Player Info</title>
   <script>
-  function back_to_roster(){
-      location.href = "roster_vanilla.html";
+    function back_to_roster(){
+        location.href = "roster_vanilla.html";
+    }
+    function getFormattedDate(date) {
+      d = new Date(date);
+      var year = d.getFullYear();
+      var month = d.getMonth() + 1;
+      var day = d.getDate();
+      var currentDate = month + '/' + day + '/' + year;
+      return currentDate;
     }
   </script>
   <style>
-
     #rst_btn{
       width: 50%;
       margin-bottom: 1rem;
@@ -18,6 +25,12 @@
       width: 100%;
       text-align: center;
       margin-bottom: 1rem !important;
+    }
+    @font-face {
+      font-family: 'Glyphicons Halflings';
+
+      src: url('../bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.eot');
+      src: url('../bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.woff') format('woff'), url('../bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
     }
     /*Bootstrap C&P*/
     * {
@@ -440,7 +453,7 @@
         </div>
       </div>
     </form>
-    <h1>John Smith</h1>
+    <h1 id="infoPlayerName">...</h1>
     <img class="img-responsive img-circle" alt="Player picture" src="../src/john_smith.jpg">
     <ul class="nav nav-tabs">
       <li class="active">
@@ -457,33 +470,54 @@
   </div>
   <div id="info+values">
     <span class="pull-left info-name">Position</span>
-    <span class="pull-right text-right info-value">Forward</span>
+    <span id="infoPlayerPosition" class="pull-right text-right info-value">Forward</span>
     <br>
     <span class="pull-left info-name">Number</span>
-    <span class="pull-right text-right info-value">76</span>
+    <span id="infoPlayerNumber" class="pull-right text-right info-value">76</span>
     <br>
     <span class="pull-left info-name">Status</span>
-    <span class="pull-right text-right info-value">Starter</span>
+    <span id="infoPlayerStatus" class="pull-right text-right info-value">Starter</span>
     <br>
     <span class="pull-left info-name">College</span>
-    <span class="pull-right text-right info-value">UCD</span>
+    <span id="infoPlayerCollege" class="pull-right text-right info-value">UCD</span>
     <br>
     <span class="pull-left info-name">Hometown</span>
-    <span class="pull-right text-right info-value">Sacramento</span>
+    <span id="infoPlayerHometown" class="pull-right text-right info-value">Sacramento</span>
     <br>
     <span class="pull-left info-name">Age</span>
-    <span class="pull-right text-right info-value">20</span>
+    <span id="infoPlayerAge" class="pull-right text-right info-value">20</span>
     <br>
     <span class="pull-left info-name">DOB</span>
-    <span class="pull-right text-right info-value">4/18/1997</span>
+    <span id="infoPlayerDOB" class="pull-right text-right info-value">4/18/1997</span>
     <br>
     <span class="pull-left info-name">Player ID</span>
-    <span class="pull-right text-right info-value">P16126065</span>
+    <span id="infoPlayerPID" class="pull-right text-right info-value">P16126065</span>
   </div>
 
   <div id="btn_ct" class="container">
-      <button id="rst_btn" type="button" class="btn btn-primary" onclick="back_to_roster()">Back to Roster</button>
-    </div>
+    <button id="rst_btn" type="button" class="btn btn-primary" onclick="back_to_roster()">Back to Roster</button>
+  </div>
+  <script>
+    localStorage.setItem('currentPlayer','Player 1');
+    var infoPlayer = localStorage.getItem('currentPlayer');
+    var inputRoster = JSON.parse(localStorage.getItem('Roster'));
+    for (var i = 0; i < inputRoster.length; ++i){
+      if (inputRoster[i].name == infoPlayer){
+        console.log(inputRoster[i]);
+        console.log(inputRoster);
+        document.getElementById('infoPlayerName').innerText = infoPlayer;
+        document.getElementById('infoPlayerPosition').innerText = inputRoster[i].position;
+        document.getElementById('infoPlayerNumber').innerText = inputRoster[i].number;
+        document.getElementById('infoPlayerStatus').innerText = inputRoster[i].status;
+        document.getElementById('infoPlayerCollege').innerText = inputRoster[i].College;
+        document.getElementById('infoPlayerHometown').innerText = inputRoster[i].Hometown;
+        document.getElementById('infoPlayerAge').innerText = inputRoster[i].Age;
+        document.getElementById('infoPlayerDOB').innerText = getFormattedDate(inputRoster[i].DOB);
+        document.getElementById('infoPlayerPID').innerText = inputRoster[i].ID;
+        break;
+      }
+    }
+  </script>
 </body>
 
 </html>
