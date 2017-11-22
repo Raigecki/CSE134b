@@ -4,6 +4,7 @@
 <head>
     <title>Account Settings</title>
     <meta charset="utf-8">
+    <script src="hideInputTab.js"></script>
 
 
     <!-- Element Styles -->
@@ -361,7 +362,7 @@
         <li>
             <a data-toggle="pill" href="roster_vanilla.html">Roster</a>
         </li>
-        <li>
+        <li class="inputTab">
             <a data-toggle="pill" href="input_stats_vanilla.html">Input</a>
         </li>
         <li class="active">
@@ -570,6 +571,8 @@
             modal.style.display = 'none';
         }
 
+        //hide input tab if user is not a coach
+        hideInputTab();
     </script>
 
 

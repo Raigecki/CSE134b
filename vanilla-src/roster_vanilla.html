@@ -4,6 +4,7 @@
 <head>
   <title>Roster</title>
   <script src="CRUD_roster.js"></script>
+  <script src="hideInputTab.js"></script>
   <script>
     function link_to_playerinfo() {
       location.href = ("../vanilla-src/player_info_vanilla.html")
@@ -942,7 +943,7 @@
     <li class="active">
       <a data-toggle="pill">Roster</a>
     </li>
-    <li>
+    <li class="inputTab">
       <a data-toggle="pill" href="input_stats_vanilla.html">Input</a>
     </li>
     <li>
@@ -1198,6 +1199,15 @@
   </script>
   <script>
     //initializeRoster(10);
+    /*var u = {
+      email : 'hi@mail.com',
+      password : 'password',
+      question : 'question',
+      answer : 'none',
+      type : 'coach'
+    }
+    localStorage.setItem('currentUser',JSON.stringify(u));*/
+    hideInputTab();
   </script>
 </body>
 
