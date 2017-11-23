@@ -5,6 +5,33 @@
     <title>Account Settings</title>
     <meta charset="utf-8">
     <script src="hideInputTab.js"></script>
+    <script>
+        function changeEmail() {
+            if (localStorage.getItem('currentUser') != undefined) {
+                var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                var selectQ = document.getElementById('securityQuestion');
+                /*console.log(currentUser['question']);
+                console.log(selectQ[selectQ.selectedIndex].innerText);
+                console.log(currentUser['answer']);
+                console.log(document.getElementById('answer').value);*/
+                if (currentUser['question']==selectQ[selectQ.selectedIndex].innerText && currentUser['answer']==document.getElementById('answer').value){
+                    currentUser['email'] = document.getElementById('password1').value;
+                }
+                localStorage.setItem('currentUser',JSON.stringify(currentUser));
+            }
+        }
+        function changePassword() {
+            if (localStorage.getItem('currentUser') != undefined) {
+                var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                var selectQ = document.getElementById('securityQuestion1');
+                if (currentUser['question']==selectQ[selectQ.selectedIndex].innerText && currentUser['answer']==document.getElementById('answer1').value 
+                    && currentUser['password']==document.getElementById('currentPassword').value && document.getElementById('newPassword').value==document.getElementById('confirmPassword').value){
+                    currentUser['password'] = document.getElementById('newPassword').value;
+                }
+                localStorage.setItem('currentUser',JSON.stringify(currentUser));
+            }
+        }
+    </script>
 
 
     <!-- Element Styles -->
@@ -406,7 +433,7 @@
                 <span id="closeEmail" class="close">&times;</span>
             </div>
             <div class="modal-body">
-                <form id="changeEmailForm" method="post">
+                <form id="changeEmailForm" method="post" onsubmit="changeEmail()">
 
                     <label for="securityQuestion">Security Question:</label>
                     <select id="securityQuestion" name="securityQuestion" class="form-control form-select">
@@ -426,7 +453,7 @@
                     <label for="password1">New E-mail:</label>
                     <input type="password" name="password1" id="password1" class="form-control">
 
-                    <input type="submit" id="changeEmailSubmit" name="changeEmailSubmit" class="btn" value="Change E-mail">
+                    <input type="submit" id="changeEmailSubmit" name="changeEmailSubmit" class="btn" value="Change E-mail" onclick="">
                 </form>
 
             </div>
@@ -447,7 +474,7 @@
             </div>
             <div class="modal-body">
 
-                <form id="changePasswordForm" method="post" enctype="multipart/form-data" onsubmit="return validateForm();">
+                <form id="changePasswordForm" method="post" enctype="multipart/form-data" onsubmit="changePassword()">
 
                     <label for="securityQuestion1">Security Question:</label>
                     <select id="securityQuestion1" name="securityQuestion1" class="form-control form-select">
@@ -572,6 +599,14 @@
         }
 
         //hide input tab if user is not a coach
+        /*var U = {
+            email : "hi@mail.com",
+            password : "password",
+            question : "What is your first car?",
+            answer : "none",
+            type : "coach"
+        }
+        localStorage.setItem('currentUser',JSON.stringify(U));*/
         hideInputTab();
     </script>
 
