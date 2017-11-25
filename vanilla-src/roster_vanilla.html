@@ -956,7 +956,7 @@
       </div>
     </div>
   </form>
-  <table class="table table-hover table-bordered">
+  <table id="playerTable" class="table table-hover table-bordered">
     <tbody>
       <tr>
         <td>
@@ -1004,7 +1004,7 @@
               <h4 class="modal-title">Remove a Player</h4>
             </div>
             <div class="modal-body">
-                <table id="playerTable" class="table table-hover table-bordered">
+                <table id="playerTable2" class="table table-hover table-bordered">
                     <tbody>
                       <tr>
                         <td onclick="close_remove_modal()">
@@ -1031,7 +1031,7 @@
   <template id="playerTemplate">
       <tr>
           <td onclick="close_remove_modal()">
-            <div id="player_5" class="container">
+            <div class="container">
               <div class="row">
                 <div class="col-xs-4 text-center">
                   <img class="img-responsive img-circle center-block" alt="Player picture" src="../src/john_smith.jpg"> 76
@@ -1059,25 +1059,28 @@
     function confirmAddPlayer() {
       var playerTable = document.getElementById('playerTable');
       var form = document.getElementById('addPlayerForm');
-      var name = form.children[0];
-      var pos = form.children[1];
-      var num = form.children[2];
-      var status = form.children[3];
-      var college = form.children[4];
-      var hometown = form.children[5];
-      var age = form.children[6];
-      var dob = form.children[7];
-      var pid = form.children[8];
+      var name = form.children[0].value;
+      var pos = form.children[1].value;
+      var num = form.children[2].value;
+      var status = form.children[3].value;
+      var college = form.children[4].value;
+      var hometown = form.children[5].value;
+      var age = form.children[6].value;
+      var dob = form.children[7].value;
+      var pid = form.children[8].value;
 
-      var player = createPlayer(name, pos, num, status, college, hometown, age, dob, pid);
+      var player = createPlayer(undefined, name, pos, num, status, college, hometown, age, dob, pid);
+      console.log(player);
       var playerRow = createPlayerRow(player);
-      playerTable.appendChild(playerRow);
+      playerTable.children[0].appendChild(playerRow.children[0]);
+      console.log(playerTable);
 
       var backRoster = JSON.parse(localStorage.getItem('Roster'));
       backRoster.push(player);
       localStorage.setItem('Roster', JSON.stringify(backRoster));
       close_add_modal();
     }
+    
   </script>
 
   <!-- Helper Scripts-->
@@ -1089,24 +1092,39 @@
       var playerTable = document.getElementById('playerTable');
       var index = playerTable.childElementCount - 1;
 
+      var tr = playerTemplate.content.children[0];
       var td = playerTemplate.content.children[0].children[0];
+      tr.children[0].setAttribute('data-index', index);
       td.setAttribute('onclick', 'link_to_playerinfo()');
-
-      //container div
-      td.children[0].setAttribute('data-index', index);
 
       //img
       td.children[0].children[0].children[0].children[0].setAttribute('alt', 'Player picture');
 
       //player p tags
-      td.children[0].children[0].children[1].children[0].append(document.createTextNode(player.name));
-      td.children[0].children[0].children[1].children[1].append(document.createTextNode(player.pos));
+      td.children[0].children[0].children[1].children[0].innerHTML = player.name;
+      td.children[0].children[0].children[1].children[1].innerHTML = player.pos;
 
       var clone = document.importNode(playerTemplate.content, true);
-      console.log(clone);
       return clone;
     }
+
+    function setPlayerTable() {
+      var playerTable = document.getElementById('playerTable');
+      var roster = JSON.parse(localStorage.getItem('Roster'));
+      for (var i = 0; i < roster.length; i++) {
+        var player = roster[i];
+        console.log(player);
+        var playerRow = createPlayerRow(player);
+        playerTable.children[0].appendChild(playerRow.children[0]);
+      }
+    }
   </script>
+
+    <!-- Page Scripts--> 
+    <script>
+        if (localStorage.getItem('Roster') == undefined) initializeRoster(1);
+        setPlayerTable();
+      </script>
 </body>
 
 </html>

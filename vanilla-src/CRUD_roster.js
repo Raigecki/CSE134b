@@ -51,13 +51,39 @@ function createPlayer(img, inputName, pos, num, stat, college, home, age, dob, p
         name: inputName,
         status: stat,
         position: pos,
-        College: college,
-        Hometown: home,
-        Age: age,
+        college: college,
+        hometown: home,
+        age: age,
         DOB: dob,
         ID: pid
     }
     return player;
+}
+
+function updatePlayerStorage(img, inputName, pos, num, stat, college, home, age, dob, pid) {
+
+    var backRoster = JSON.parse(localStorage.getItem('Roster'));    
+    index = -1;
+
+    for (var i = 0; i < backRoster.length; i++) {
+
+        if (backRoster[i].ID == pid) {
+
+            index = i;
+            break;
+        }
+    }
+
+    backRoster[i].img = img;
+    backRoster[i].num = num;
+    backRoster[i].inputName = name;
+    backRoster[i].stat = stat;
+    backRoster[i].position = pos;
+    backRoster[i].college = college;
+    backRoster[i].hometown = home;
+    backRoster[i].age = age;
+    backRoster[i].DOB = dob;
+    backRoster[i].ID = pid;
 }
 
 function deletePlayerByIndex(index) {
@@ -70,6 +96,7 @@ function deletePlayerByIndex(index) {
 
 function deletePlayerByNumber(num) {
 
+    var backRoster = JSON.parse(localStorage.getItem('Roster'));    
     index = -1;
 
     for (var i = 0; i < backRoster.length; i++) {
@@ -86,11 +113,12 @@ function deletePlayerByNumber(num) {
 
 function deletePlayerById(inputId) {
 
+    var backRoster = JSON.parse(localStorage.getItem('Roster'));    
     index = -1;
 
     for (var i = 0; i < backRoster.length; i++) {
 
-        if (backRoster[i].pid == inputId) {
+        if (backRoster[i].ID == inputId) {
 
             index = i;
             break;
