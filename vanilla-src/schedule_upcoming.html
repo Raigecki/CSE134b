@@ -673,7 +673,7 @@
             var location = updateModal.querySelector('#updateEvent_loc').value + ", " + updateModal.querySelector('#updateEvent_city').value;
             upcomingEventList[numIndex].location = location;
 
-            if (checkForDuplicateEvents(upcomingEventList, upcomingEventList[numIndex])) {
+            if (checkForDuplicateEvents(upcomingEventList, upcomingEventList[numIndex], numIndex)) {
                 alert('Error: Another event already exists at the same time and date.')
                 return 0;
             }
@@ -836,7 +836,7 @@
                 else {
                     upcomingEventList = JSON.parse(upcomingEventList);
                 }
-                if (checkForDuplicateEvents(upcomingEventList, objEvent)) {
+                if (checkForDuplicateEvents(upcomingEventList, objEvent, -1)) {
                     alert('Error: Another event already exists at the same time and date.')
                     return 0;
                 }
@@ -851,7 +851,7 @@
                 else {
                     previousEventList = JSON.parse(previousEventList);
                 }
-                if (checkForDuplicateEvents(previousEventList, objEvent)) {
+                if (checkForDuplicateEvents(previousEventList, objEvent, -1)) {
                     alert('Error: Another event already exists at the same time and date.')
                     return 0;
                 }
@@ -877,10 +877,10 @@
             }
         }
 
-        function checkForDuplicateEvents(eventList, newEvent) {
+        function checkForDuplicateEvents(eventList, newEvent, currPos) {
             for (var index = 0; index < eventList.length; index++) {
                 var event = eventList[index];
-                if (event.date == newEvent.date && event.time == newEvent.time) {
+                if (index != currPos && event.date == newEvent.date && event.time == newEvent.time) {
                     return true;
                 }
             }

@@ -4,7 +4,11 @@
 <head>
     <title>Home</title>
     <meta charset="utf-8">
+<<<<<<< HEAD
     <script src="schedule.js" type="text/javascript"></script>
+=======
+    <script src="hideInputTab.js"></script>
+>>>>>>> da6c69f36e495b519b7d0f8774b7345ccff9af07
     <style>
         body {
             text-align: center;
@@ -237,7 +241,7 @@
             <li>
                 <a data-toggle="pill" href="roster_vanilla.html">Roster</a>
             </li>
-            <li>
+            <li class="inputTab">
                 <a data-toggle="pill" href="input_stats_vanilla.html">Input</a>
             </li>
             <li>
@@ -313,6 +317,7 @@
         </tr>
     </template>
     <script>
+        hideInputTab();
         populateGames();
         populateTeamStats();
 

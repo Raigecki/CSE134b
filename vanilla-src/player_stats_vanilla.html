@@ -7,8 +7,22 @@
       function back_to_roster(){
         location.href = "roster_vanilla.html";
       }
+    function getFormattedDate(date) {
+      d = new Date(date);
+      var year = d.getFullYear();
+      var month = d.getMonth() + 1;
+      var day = d.getDate();
+      var currentDate = month + '/' + day + '/' + year;
+      return currentDate;
+    }
     </script>
   <style>
+    @font-face {
+      font-family: 'Glyphicons Halflings';
+
+      src: url('../bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.eot');
+      src: url('../bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.woff') format('woff'), url('../bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+    }
       #rstr_btn {
         margin: auto;
         width: 50%;
@@ -675,10 +689,8 @@
         </div>
       </div>
     </form>
-    <h1>John Smith</h1>
-    <div>
-      <img class="img-responsive img-circle" alt="Player picture" src="../src/john_smith.jpg">
-    </div>
+    <h1 id="statsPlayerName"></h1>
+    <img class="img-responsive img-circle" alt="Player picture" src="../src/john_smith.jpg">
     <ul class="nav nav-tabs">
       <li>
         <a href="player_info_vanilla.html">Information</a>
@@ -698,45 +710,66 @@
     <tbody>
       <tr>
         <td>Fouls</td>
-        <td>6</td>
+        <td id="statsPlayerFouls"></td>
       </tr>
       <tr>
         <td>Red cards</td>
-        <td>0</td>
+        <td id="statsPlayerRcards"></td>
       </tr>
       <tr>
         <td>Yellow cards</td>
-        <td>2</td>
+        <td id="statsPlayerYcards"></td>
       </tr>
       <tr>
         <td>Shots on goal</td>
-        <td>12</td>
+        <td id="statsPlayerSOG"></td>
       </tr>
       <tr>
         <td>Goals</td>
-        <td>7</td>
+        <td id="statsPlayerGoals"></td>
       </tr>
       <tr>
         <td>Corner kicks taken</td>
-        <td>0</td>
+        <td id="statsPlayerCkicks"></td>
       </tr>
       <tr>
         <td>Penalty kicks taken</td>
-        <td>2</td>
+        <td id="statsPlayerPkicks"></td>
       </tr>
       <tr>
         <td>Throw-ins</td>
-        <td>6</td>
+        <td id="statsPlayerTins"></td>
       </tr>
       <tr>
         <td>Appearances</td>
-        <td>10</td>
+        <td id="statsPlayerAppearances"></td>
       </tr>
     </tbody>
   </table>
   <div id="btn_ctn" class="container">
-      <button id="rstr_btn" type="button" class="btn btn-primary" onclick="back_to_roster()">Back to Roster</button>
-    </div>
+    <button id="rstr_btn" type="button" class="btn btn-primary" onclick="back_to_roster()">Back to Roster</button>
+  </div>
+  <script>
+      var infoPlayer = localStorage.getItem('currentPlayer');
+      var inputRoster = JSON.parse(localStorage.getItem('Roster'));
+      for (var i = 0; i < inputRoster.length; ++i){
+        if (inputRoster[i].name == infoPlayer){
+          console.log(inputRoster[i]);
+          console.log(inputRoster);
+          document.getElementById('statsPlayerName').innerText = infoPlayer;
+          document.getElementById('statsPlayerFouls').innerText = inputRoster[i].stats.fouls;
+          document.getElementById('statsPlayerRcards').innerText = inputRoster[i].stats.redCards;
+          document.getElementById('statsPlayerYcards').innerText = inputRoster[i].stats.yellowCards;
+          document.getElementById('statsPlayerSOG').innerText = inputRoster[i].stats.shotsOnGoal;
+          document.getElementById('statsPlayerGoals').innerText = inputRoster[i].stats.goals;
+          document.getElementById('statsPlayerCkicks').innerText = inputRoster[i].stats.cKicks;
+          document.getElementById('statsPlayerPkicks').innerText = inputRoster[i].stats.pKicks;
+          document.getElementById('statsPlayerTins').innerText = inputRoster[i].stats.tIns;
+          document.getElementById('statsPlayerAppearances').innerText = inputRoster[i].stats.appearances;
+          break;
+        }
+      }
+    </script>
 </body>
 
 </html>
