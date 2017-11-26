@@ -4,8 +4,14 @@
 <head>
   <title>Roster</title>
   <script src="CRUD_roster.js"></script>
+  <script src="hideInputTab.js"></script>
   <script>
-    function link_to_playerinfo() {
+    function link_to_playerinfo(td) {
+
+      console.log(td);
+      var pid = td.getElementsByTagName('input')[0].value;
+      console.log('PID = ' + pid);
+      localStorage.setItem('currentPlayer', pid);
       location.href = ("../vanilla-src/player_info_vanilla.html")
     }
     function show_add_modal(){
@@ -26,6 +32,12 @@
     }
   </script>
   <style>
+    @font-face {
+      font-family: 'Glyphicons Halflings';
+
+      src: url('../bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.eot');
+      src: url('../bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.woff') format('woff'), url('../bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+    }
      /* Modal Styles */
      .modal {
       display: none;
@@ -939,7 +951,7 @@
     <li class="active">
       <a data-toggle="pill">Roster</a>
     </li>
-    <li>
+    <li class="inputTab">
       <a data-toggle="pill" href="input_stats_vanilla.html">Input</a>
     </li>
     <li>
@@ -1031,6 +1043,7 @@
   <template id="playerTemplate">
       <tr>
           <td onclick="close_remove_modal()">
+            <input type="hidden">
             <div class="container">
               <div class="row">
                 <div class="col-xs-4 text-center">
@@ -1070,10 +1083,9 @@
       var pid = form.children[8].value;
 
       var player = createPlayer(undefined, name, pos, num, status, college, hometown, age, dob, pid);
-      console.log(player);
+      //console.log(player);
       var playerRow = createPlayerRow(player);
       playerTable.children[0].appendChild(playerRow.children[0]);
-      console.log(playerTable);
 
       var backRoster = JSON.parse(localStorage.getItem('Roster'));
       backRoster.push(player);
@@ -1095,14 +1107,17 @@
       var tr = playerTemplate.content.children[0];
       var td = playerTemplate.content.children[0].children[0];
       tr.children[0].setAttribute('data-index', index);
-      td.setAttribute('onclick', 'link_to_playerinfo()');
+      td.setAttribute('onclick', 'link_to_playerinfo(this);');
+
+      //pid
+      td.getElementsByTagName('input')[0].value = player.ID;
 
       //img
-      td.children[0].children[0].children[0].children[0].setAttribute('alt', 'Player picture');
+      td.getElementsByTagName('img')[0].setAttribute('alt', 'Player picture');
 
       //player p tags
-      td.children[0].children[0].children[1].children[0].innerHTML = player.name;
-      td.children[0].children[0].children[1].children[1].innerHTML = player.pos;
+      td.getElementsByTagName('p')[0].innerHTML = player.name;
+      td.getElementsByTagName('p')[1].innerHTML = player.position;
 
       var clone = document.importNode(playerTemplate.content, true);
       return clone;
@@ -1111,9 +1126,9 @@
     function setPlayerTable() {
       var playerTable = document.getElementById('playerTable');
       var roster = JSON.parse(localStorage.getItem('Roster'));
+      //var roster = JSON.parse(localStorage.getItem('Roster'));
       for (var i = 0; i < roster.length; i++) {
         var player = roster[i];
-        console.log(player);
         var playerRow = createPlayerRow(player);
         playerTable.children[0].appendChild(playerRow.children[0]);
       }
@@ -1125,6 +1140,18 @@
         if (localStorage.getItem('Roster') == undefined) initializeRoster(1);
         setPlayerTable();
       </script>
+  <script>
+    //initializeRoster(10);
+    /*var u = {
+      email : 'hi@mail.com',
+      password : 'password',
+      question : 'question',
+      answer : 'none',
+      type : 'coach'
+    }
+    localStorage.setItem('currentUser',JSON.stringify(u));*/
+    hideInputTab();
+  </script>
 </body>
 
 </html>
