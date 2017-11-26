@@ -31,6 +31,18 @@
                 localStorage.setItem('currentUser',JSON.stringify(currentUser));
             }
         }
+        function changeQuestion() {
+            if (localStorage.getItem('currentUser') != undefined) {
+                var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                var selectQ = document.getElementById('currentSecurityQuestion');
+                var selectNewQ = document.getElementById('newSecurityQuestion');
+                if (currentUser['question']==selectQ[selectQ.selectedIndex].innerText && currentUser['answer']==document.getElementById('currentAnswer').value){
+                    currentUser['question'] = selectNewQ[selectNewQ.selectedIndex].innerText;
+                    currentUser['answer'] = document.getElementById('newAnswer').value;
+                }
+                localStorage.setItem('currentUser',JSON.stringify(currentUser));
+            }
+        }
     </script>
 
 
@@ -405,21 +417,21 @@
         <div class="sectionEntry">
             <label>E-mail Address:</label>
             <p>
-                <span class="entry" id="email">stevendanieledwin@ucsd.edu</span>
+                <span class="entry" id="email"></span>
                 <img id="changeEmail" alt="edit" src="edit.svg">
             </p>
         </div>
         <div class="sectionEntry">
             <label>Password:</label>
             <p>
-                <span class="entry" id="password">*****</span>
+                <span class="entry" id="password">***********</span>
                 <img id="changePassword" alt="edit" src="edit.svg">
             </p>
         </div>
         <div class="sectionEntry">
             <label>Security Question:</label>
             <p>
-                <span class="entry" id="security">What is your mother's maiden name?</span>
+                <span class="entry" id="security"></span>
                 <img id="changeSecurity" alt="edit" src="edit.svg">
             </p>
         </div>
@@ -451,7 +463,7 @@
                     <input type="text" name="answer" id="answer" class="form-control">
 
                     <label for="password1">New E-mail:</label>
-                    <input type="password" name="password1" id="password1" class="form-control">
+                    <input type="text" name="password1" id="password1" class="form-control">
 
                     <input type="submit" id="changeEmailSubmit" name="changeEmailSubmit" class="btn" value="Change E-mail" onclick="">
                 </form>
@@ -517,7 +529,7 @@
                 <span id="closeSecurity" class="close">&times;</span>
             </div>
             <div class="modal-body">
-                <form id="changeSecurityForm" method="post" enctype="multipart/form-data" onsubmit="return validateForm();">
+                <form id="changeSecurityForm" method="post" enctype="multipart/form-data" onsubmit="changeQuestion()">
 
                     <label for="currentSecurityQuestion">Security Question:</label>
                     <select id="currentSecurityQuestion" name="currentSecurityQuestion" class="form-control form-select">
@@ -535,7 +547,7 @@
                     <input type="text" name="currentAnswer" id="currentAnswer" class="form-control">
 
                     <label for="newSecurityQuestion">Security Question:</label>
-                    <select id="newSecurityQuestion" name="currentSecurityQuestion" class="form-control form-select">
+                    <select id="newSecurityQuestion" name="newSecurityQuestion" class="form-control form-select">
                         <optgroup label="new security questions">
                             <option value="0" selected disabled>-- Select a Security Question--</option>
                             <option value="1">What is your mother's maiden name?</option>
@@ -548,9 +560,6 @@
 
                     <label for="newAnswer">Answer:</label>
                     <input type="text" name="newAnswer" id="newAnswer" class="form-control">
-
-                    <label for="password3">New Password:</label>
-                    <input type="password" name="password3" id="password3" class="form-control">
 
                     <input type="submit" id="changeSecuritySubmit" name="changeSecuritySubmit" class="btn" value="Update">
                 </form>
@@ -608,6 +617,11 @@
         }
         localStorage.setItem('currentUser',JSON.stringify(U));*/
         hideInputTab();
+
+        //populate the page with current account info
+        var currUser = JSON.parse(localStorage.getItem('currentUser'));
+        document.getElementById('email').innerText = currUser.email;
+        document.getElementById('security').innerText = currUser.question;
     </script>
 
 
