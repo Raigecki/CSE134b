@@ -1135,8 +1135,11 @@
       //var roster = JSON.parse(localStorage.getItem('Roster'));
       for (var i = 0; i < roster.length; i++) {
         var player = roster[i];
-        var playerRow = createPlayerRow(player);
-        playerTable.children[0].appendChild(playerRow.children[0]);
+
+        if (player.inactive == false) {
+          var playerRow = createPlayerRow(player);
+          playerTable.children[0].appendChild(playerRow.children[0]);
+        }
       }
     }
   </script>

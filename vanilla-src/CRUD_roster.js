@@ -37,7 +37,8 @@ function initializeRoster(amount) {
             age: (30 - i),
             DOB: Date.now(),
             ID: ('P' + (11110 + i)),
-            stats: stats
+            stats: stats,
+            inactive: false
         }
 
         players.push(player);
@@ -68,7 +69,8 @@ function createPlayer(img, inputName, pos, num, stat, college, home, age, dob, p
         age: age,
         DOB: dob,
         ID: pid,
-        stats: stats
+        stats: stats,
+        inactive: false
     }
     return player;
 }
@@ -100,6 +102,12 @@ function updatePlayerStorage(img, inputName, pos, num, stat, college, home, age,
 
     localStorage.setItem('Roster', JSON.stringify(backRoster));
 }   
+
+function setInactiveByIndex(index) {
+    var backRoster = JSON.parse(localStorage.getItem('Roster'));
+    backRoster[index].inactive = true;
+    localStorage.setItem('Roster', JSON.stringify(backRoster));    
+}
 
 function deletePlayerByIndex(index) {
 
@@ -133,14 +141,14 @@ function deletePlayerById(inputId) {
 
     for (var i = 0; i < backRoster.length; i++) {
 
-        if (backRoster[i].ID == inputId) {
+        if (backRoster[i].ID == inputId && backRoster[i].inactive == false) {
 
             index = i;
             break;
         }
     }
     if (index == -1) alert('The player with ID ' + inputId + ' cannot be found');
-    else deletePlayerByIndex(index);
+    else setInactiveByIndex(index);
 }
 
 function initializeInputStats() {
