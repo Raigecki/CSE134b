@@ -1,5 +1,5 @@
 function initializeRoster(amount) {
-    alert('initializing roster');
+    //alert('initializing roster');
     var players = [];
 
     if (amount == 0) {
