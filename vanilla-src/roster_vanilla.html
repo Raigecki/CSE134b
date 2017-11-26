@@ -1053,7 +1053,7 @@
             <div class="container">
               <div class="row">
                 <div class="col-xs-4 text-center">
-                  <img class="img-responsive img-circle center-block" alt="Player picture" src="../src/john_smith.jpg"> 76
+                  <img class="img-responsive img-circle center-block" alt="Player Icon" src="../src/john_smith.jpg"> 76
                 </div>
                 <div class="col-xs-8 text-right">
                   <p>John Smith</p>
@@ -1071,6 +1071,7 @@
     for(var i=0;i < values.length; i++){
       values.item(i).setAttribute("contenteditable","true");
     }
+    
   </script>
 
   <!-- CRUD Scripts -->
@@ -1105,28 +1106,71 @@
   <script>
     function createPlayerRow(player) {
 
-      var playerTemplate = document.getElementById('playerTemplate');
+      if ('options' in document.createElement('template')) {
 
-      var playerTable = document.getElementById('playerTable');
-      var index = playerTable.childElementCount - 1;
+        var playerTemplate = document.getElementById('playerTemplate');
 
-      var tr = playerTemplate.content.children[0];
-      var td = playerTemplate.content.children[0].children[0];
-      tr.children[0].setAttribute('data-index', index);
-      td.setAttribute('onclick', 'link_to_playerinfo(this);');
+        var playerTable = document.getElementById('playerTable');
+        var index = playerTable.childElementCount - 1;
 
-      //pid
-      td.getElementsByTagName('input')[0].value = player.ID;
+        var tr = playerTemplate.content.children[0];
+        var td = playerTemplate.content.children[0].children[0];
+        tr.setAttribute('data-index', index);
+        tr.setAttribute('onclick', 'link_to_playerinfo(this);');
 
-      //img
-      td.getElementsByTagName('img')[0].setAttribute('alt', 'Player picture');
+        //pid
+        td.getElementsByTagName('input')[0].value = player.ID;
 
-      //player p tags
-      td.getElementsByTagName('p')[0].innerHTML = player.name;
-      td.getElementsByTagName('p')[1].innerHTML = player.position;
+        //img
+        td.getElementsByTagName('img')[0].setAttribute('alt', 'Player picture');
 
-      var clone = document.importNode(playerTemplate.content, true);
-      return clone;
+        //player p tags
+        td.getElementsByTagName('p')[0].innerHTML = player.name;
+        td.getElementsByTagName('p')[1].innerHTML = player.position;
+
+        var clone = document.importNode(playerTemplate.content, true);
+        return clone.children[0];
+      }
+      else {
+
+        var tr = document.createElement('tr');
+        var td = document.createElement('td');
+        var input = document.createElement('input');
+        var container = document.createElement('div');
+        var row = document.createElement('div');
+        var col4 = document.createElement('div');
+        var img = document.createElement('img');
+        var col8 = document.createElement('div');
+        var name = document.createElement('p');
+        var pos = document.createElement('p');
+    
+        tr.setAttribute('data-index', index);
+        tr.setAttribute('onclick', 'link_to_playerinfo(this);');
+        td.setAttribute('onclick', 'close_remove_modal()');
+        input.setAttribute('type', 'hidden');
+        input.value = player.ID;
+        container.setAttribute('class', 'container');
+        row.setAttribute('class', 'row');
+        col4.setAttribute('class', 'col-xs-4 text-center');
+        img.setAttribute('class', 'img-responsive img-circle center-block');
+        img.setAttribute('alt', 'Player Icon');
+        img.setAttribute('src', '../src/john_smith.jpg');
+        col8.setAttribute('class', 'col-xs-8 text-right');
+        name.innerHTML = player.name;
+        pos.innerHTML = player.position;
+    
+        col8.appendChild(name);
+        col8.appendChild(pos);
+        col4.appendChild(img);
+        row.appendChild(col4);
+        row.appendChild(col8);
+        container.appendChild(row);
+        td.appendChild(input);
+        td.appendChild(container);
+        tr.appendChild(td);
+
+        return tr;
+      }
     }
 
     function setPlayerTable() {
@@ -1138,7 +1182,7 @@
 
         if (player.inactive == false) {
           var playerRow = createPlayerRow(player);
-          playerTable.children[0].appendChild(playerRow.children[0]);
+          playerTable.children[0].appendChild(playerRow);
         }
       }
     }
