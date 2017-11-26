@@ -14,12 +14,20 @@ function updateSchedule(upcomingEventList) {
     var todayDate = Date.parse(today.toDateString());
 
     //update upcoming event list
-    for (var index = 0; index < upcomingEventList.length; index++) {
+    var index = 0;
+    for (index = 0; index < upcomingEventList.length; index++) {
         if (todayDate <= Date.parse(upcomingEventList[index].date)) {
             break;
         }
     }
-    var previousEvents = upcomingEventList.splice(0, index);
+    
+    if (index == 0) {
+        var previousEvents = [];
+    }
+    else {
+        previousEvents = upcomingEventList.splice(0, index);
+    }
+
     localStorage.setItem('upcomingList', JSON.stringify(upcomingEventList));
 
     //move expired events to previous list

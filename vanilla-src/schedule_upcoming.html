@@ -463,9 +463,9 @@
             </div>
             <div id="addBody" class="modal-body">
 
-                <form id="addEventForm" method="POST" onsubmit="addEvent();">
+                <form id="addEventForm" method="POST" onsubmit="addEvent()">
                     <label for="eventType">Select Type of Event:</label>
-                    <select id="eventType" name="eventType" form="addEventForm" required onchange="changeAddInfo(this)">
+                    <select id="eventType" name="eventType" form="addEventForm" onchange="changeAddInfo(this)">
                         <option value="Game">Game</option>
                         <option value="Practice">Practice</option>
                     </select>
@@ -479,7 +479,7 @@
                     <input type="time" name="addEvent_time" required id="addEvent_time">
                     <div id="statusContainer">
                         <label for="homeaway_status">Home/Away:</label>
-                        <select name="homeaway_status" required id="homeaway_status">
+                        <select name="homeaway_status" id="homeaway_status">
                             <option value="Home">Home</option>
                             <option value="Away">Away</option>
                         </select>
@@ -515,7 +515,7 @@
                     <input type="time" name="updateEvent_time" required id="updateEvent_time">
                     <div id="updateStatusContainer">
                         <label for="updateHomeaway_status">Home/Away:</label>
-                        <select name="updateHomeaway_status" required id="updateHomeaway_status">
+                        <select name="updateHomeaway_status" id="updateHomeaway_status">
                             <option value="Home">Home</option>
                             <option value="Away">Away</option>
                         </select>
@@ -559,6 +559,7 @@
             var opponentInfo = document.querySelector('#opponentContainer');
             var statusInfo = document.querySelector('#statusContainer');
             if (dropdown.value == 'Practice') {
+                opponentInfo.querySelector('#addGame_opponent').required = false;
                 opponentInfo.style.display = 'none';
                 statusInfo.style.display = 'none';
             }
@@ -608,7 +609,8 @@
         function removeFromList(indexStr) {
             var numIndex = parseInt(indexStr);
             var upcomingEventList = JSON.parse(localStorage.getItem('upcomingList'));
-            upcomingEventList.splice(numIndex, 1);
+            upcomingEventList[numIndex].valid = '0';
+            //upcomingEventList.splice(numIndex, 1);
             localStorage.setItem('upcomingList', JSON.stringify(upcomingEventList));
             location.reload();
         }
@@ -628,6 +630,7 @@
                 statusInfo.style.display = 'block';
             }
             else {
+                opponentInfo.querySelector('#updateGame_opponent').required = false;
                 opponentInfo.style.display = 'none';
                 statusInfo.style.display = 'none';
             }
@@ -705,64 +708,66 @@
             var addModal = document.querySelector('#addEventModal');
             for (var index = 0; index < upcomingEventList.length; index++) {
                 var currentEvent = upcomingEventList[index];
-                if (currentEvent.type == 'Game') {
-                    //get template
-                    var eventTemplate = document.querySelector('#gameTemplate');
-                    var templateContent = eventTemplate.content;
-                    templateContent.children[0].setAttribute('data-index', index);
+                if (currentEvent.valid == '1') {
+                    if (currentEvent.type == 'Game') {
+                        //get template
+                        var eventTemplate = document.querySelector('#gameTemplate');
+                        var templateContent = eventTemplate.content;
+                        templateContent.children[0].setAttribute('data-index', index);
 
-                    //team info
-                    var teamStatus = templateContent.querySelector('.teamInfo p:last-child');
-                    teamStatus.textContent = "(" + currentEvent.status + ")";
+                        //team info
+                        var teamStatus = templateContent.querySelector('.teamInfo p:last-child');
+                        teamStatus.textContent = "(" + currentEvent.status + ")";
 
-                    //opponent info
-                    var oppStatus = (currentEvent.status == 'Home') ? 'Away' : 'Home';
-                    var oppInfo = templateContent.querySelectorAll('.oppInfo p');
-                    oppInfo[0].textContent = currentEvent.opponent;
-                    oppInfo[1].textContent = "(" + oppStatus + ")";
+                        //opponent info
+                        var oppStatus = (currentEvent.status == 'Home') ? 'Away' : 'Home';
+                        var oppInfo = templateContent.querySelectorAll('.oppInfo p');
+                        oppInfo[0].textContent = currentEvent.opponent;
+                        oppInfo[1].textContent = "(" + oppStatus + ")";
 
-                    //game info
-                    var hour = parseInt(currentEvent.time.substr(0, 2));
-                    var timeHalf = 'AM';
-                    if (hour > 12) {
-                        hour = hour % 12;
-                        timeHalf = 'PM';
+                        //game info
+                        var hour = parseInt(currentEvent.time.substr(0, 2));
+                        var timeHalf = 'AM';
+                        if (hour > 12) {
+                            hour = hour % 12;
+                            timeHalf = 'PM';
+                        }
+                        var timeStr = hour.toString() + currentEvent.time.substr(2) + ' ' + timeHalf;
+                        var gameInfo = templateContent.querySelectorAll('.gameInfo p');
+                        gameInfo[0].textContent = currentEvent.date + ' ' + timeStr;
+                        gameInfo[2].textContent = currentEvent.location;
+
+                        var gameClone = document.importNode(templateContent, true);
+                        var mainBody = document.querySelector('body');
+                        mainBody.insertBefore(gameClone, addModal);
+
                     }
-                    var timeStr = hour.toString() + currentEvent.time.substr(2) + ' ' + timeHalf;
-                    var gameInfo = templateContent.querySelectorAll('.gameInfo p');
-                    gameInfo[0].textContent = currentEvent.date + ' ' + timeStr;
-                    gameInfo[2].textContent = currentEvent.location;
+                    else {
+                        //get practice template
+                        var eventTemplate = document.querySelector('#practiceTemplate');
+                        var templateContent = eventTemplate.content;
+                        templateContent.children[0].setAttribute('data-index', index);
 
-                    var gameClone = document.importNode(templateContent, true);
-                    var mainBody = document.querySelector('body');
-                    mainBody.insertBefore(gameClone, addModal);
+                        //set date and time
+                        var hour = parseInt(currentEvent.time.substr(0, 2));
+                        var timeHalf = 'AM';
+                        if (hour > 12) {
+                            hour = hour % 12;
+                            timeHalf = 'PM';
+                        }
+                        var timeStr = hour.toString() + currentEvent.time.substr(2) + ' ' + timeHalf;
+                        var practTime = templateContent.querySelector('.practiceTime p:last-child');
+                        practTime.textContent = currentEvent.date + ' ' + timeStr;
 
-                }
-                else {
-                    //get practice template
-                    var eventTemplate = document.querySelector('#practiceTemplate');
-                    var templateContent = eventTemplate.content;
-                    templateContent.children[0].setAttribute('data-index', index);
+                        var practLoc = templateContent.querySelector('.practiceLoc p:last-child');
+                        practLoc.textContent = currentEvent.location;
 
-                    //set date and time
-                    var hour = parseInt(currentEvent.time.substr(0, 2));
-                    var timeHalf = 'AM';
-                    if (hour > 12) {
-                        hour = hour % 12;
-                        timeHalf = 'PM';
+                        //insert
+                        var practiceClone = document.importNode(templateContent, true);
+                        var mainBody = document.querySelector('body');
+                        mainBody.insertBefore(practiceClone, addModal);
+
                     }
-                    var timeStr = hour.toString() + currentEvent.time.substr(2) + ' ' + timeHalf;
-                    var practTime = templateContent.querySelector('.practiceTime p:last-child');
-                    practTime.textContent = currentEvent.date + ' ' + timeStr;
-
-                    var practLoc = templateContent.querySelector('.practiceLoc p:last-child');
-                    practLoc.textContent = currentEvent.location;
-
-                    //insert
-                    var practiceClone = document.importNode(templateContent, true);
-                    var mainBody = document.querySelector('body');
-                    mainBody.insertBefore(practiceClone, addModal);
-
                 }
             }
         }
@@ -821,6 +826,7 @@
             objEvent['date'] = date;
             objEvent['time'] = timeString;
             objEvent['location'] = location;
+            objEvent['valid'] = '1';
             objEvent['dateVal'] = eventForm.querySelector('#addEvent_date').value;
             if (checkDateLater(date, timeString)) {
                 var upcomingEventList = localStorage.getItem('upcomingList');
@@ -852,8 +858,11 @@
                 previousEventList.push(objEvent);
                 localStorage.setItem('previousList', JSON.stringify(previousEventList));
             }
-            addModal.style.display = 'none';
             eventForm.reset();
+            eventForm.querySelector('#eventType').value = 'Game';
+            eventForm.querySelector('#opponentContainer').style.display = 'block';
+            eventForm.querySelector('#statusContainer').style.display = 'block';
+            addModal.style.display = 'none';
         }
 
         function checkDateLater(date, time) {
@@ -885,7 +894,11 @@
         document.getElementById('closeAddEvent').onclick = function () {
             var modal = this.parentNode.parentNode.parentNode;
             modal.style.display = 'none';
-            this.parentNode.parentNode.querySelector('#addEventForm').reset();
+            var eventForm = this.parentNode.parentNode.querySelector('#addEventForm');
+            eventForm.reset();
+            eventForm.querySelector('#eventType').value = 'Game';
+            eventForm.querySelector('#opponentContainer').style.display = 'block';
+            eventForm.querySelector('#statusContainer').style.display = 'block';
         }
         document.getElementById('closeUpdateEvent').onclick = function () {
             var modal = this.parentNode.parentNode.parentNode;

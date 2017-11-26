@@ -300,65 +300,67 @@
 
             for (var index = 0; index < previousEventList.length; index++) {
                 var prevEvent = previousEventList[index];
-                if (prevEvent.type == 'Game') {
-                    //get template
-                    var eventTemplate = document.querySelector('#previousGameTemplate');
-                    var templateContent = eventTemplate.content;
-                    templateContent.children[0].setAttribute('data-index', index);
+                if (prevEvent.valid == '1') {
+                    if (prevEvent.type == 'Game') {
+                        //get template
+                        var eventTemplate = document.querySelector('#previousGameTemplate');
+                        var templateContent = eventTemplate.content;
+                        templateContent.children[0].setAttribute('data-index', index);
 
-                    //team info
-                    var teamInfo = templateContent.querySelectorAll('.teamInfo p');
-                    teamInfo[1].textContent = prevEvent.gameStats.goals;
-                    teamInfo[2].textContent = "(" + prevEvent.status + ")";
+                        //team info
+                        var teamInfo = templateContent.querySelectorAll('.teamInfo p');
+                        teamInfo[1].textContent = prevEvent.gameStats.goals;
+                        teamInfo[2].textContent = "(" + prevEvent.status + ")";
 
-                    //opponent info
-                    var oppStatus = (status == 'Home') ? 'Away' : 'Home';
-                    var oppInfo = templateContent.querySelectorAll('.oppInfo p');
-                    oppInfo[0].textContent = prevEvent.opponent;
-                    oppInfo[1].textContent = prevEvent.gameStats.oppGoals;
-                    oppInfo[2].textContent = "(" + oppStatus + ")";
+                        //opponent info
+                        var oppStatus = (status == 'Home') ? 'Away' : 'Home';
+                        var oppInfo = templateContent.querySelectorAll('.oppInfo p');
+                        oppInfo[0].textContent = prevEvent.opponent;
+                        oppInfo[1].textContent = prevEvent.gameStats.oppGoals;
+                        oppInfo[2].textContent = "(" + oppStatus + ")";
 
-                    //game info
-                    var hour = parseInt(prevEvent.time.substr(0, 2));
-                    var timeHalf = 'AM';
-                    if (hour > 12) {
-                        hour = hour % 12;
-                        timeHalf = 'PM';
+                        //game info
+                        var hour = parseInt(prevEvent.time.substr(0, 2));
+                        var timeHalf = 'AM';
+                        if (hour > 12) {
+                            hour = hour % 12;
+                            timeHalf = 'PM';
+                        }
+                        var timeStr = hour.toString() + prevEvent.time.substr(2) + ' ' + timeHalf;
+                        var gameInfo = templateContent.querySelectorAll('.gameInfo p');
+                        gameInfo[0].textContent = prevEvent.date + ' ' + timeStr;
+                        gameInfo[2].textContent = prevEvent.location;
+
+                        var gameClone = document.importNode(templateContent, true);
+                        var mainBody = document.querySelector('body');
+                        mainBody.appendChild(gameClone);
+
                     }
-                    var timeStr = hour.toString() + prevEvent.time.substr(2) + ' ' + timeHalf;
-                    var gameInfo = templateContent.querySelectorAll('.gameInfo p');
-                    gameInfo[0].textContent = prevEvent.date + ' ' + timeStr;
-                    gameInfo[2].textContent = prevEvent.location;
+                    else {
+                        //get practice template
+                        var eventTemplate = document.querySelector('#previousPracticeTemplate');
+                        var templateContent = eventTemplate.content;
+                        templateContent.children[0].setAttribute('data-index', index);
 
-                    var gameClone = document.importNode(templateContent, true);
-                    var mainBody = document.querySelector('body');
-                    mainBody.appendChild(gameClone);
+                        //set date and time
+                        var hour = parseInt(prevEvent.time.substr(0, 2));
+                        var timeHalf = 'AM';
+                        if (hour > 12) {
+                            hour = hour % 12;
+                            timeHalf = 'PM';
+                        }
+                        var timeStr = hour.toString() + prevEvent.time.substr(2) + ' ' + timeHalf;
+                        var practTime = templateContent.querySelector('.practiceTime p:last-child');
+                        practTime.textContent = prevEvent.date + ' ' + timeStr;
 
-                }
-                else {
-                    //get practice template
-                    var eventTemplate = document.querySelector('#previousPracticeTemplate');
-                    var templateContent = eventTemplate.content;
-                    templateContent.children[0].setAttribute('data-index', index);
+                        var practLoc = templateContent.querySelector('.practiceLoc p:last-child');
+                        practLoc.textContent = prevEvent.location;
 
-                    //set date and time
-                    var hour = parseInt(prevEvent.time.substr(0, 2));
-                    var timeHalf = 'AM';
-                    if (hour > 12) {
-                        hour = hour % 12;
-                        timeHalf = 'PM';
+                        //insert
+                        var practiceClone = document.importNode(templateContent, true);
+                        var mainBody = document.querySelector('body');
+                        mainBody.appendChild(practiceClone);
                     }
-                    var timeStr = hour.toString() + prevEvent.time.substr(2) + ' ' + timeHalf;
-                    var practTime = templateContent.querySelector('.practiceTime p:last-child');
-                    practTime.textContent = prevEvent.date + ' ' + timeStr;
-
-                    var practLoc = templateContent.querySelector('.practiceLoc p:last-child');
-                    practLoc.textContent = prevEvent.location;
-
-                    //insert
-                    var practiceClone = document.importNode(templateContent, true);
-                    var mainBody = document.querySelector('body');
-                    mainBody.appendChild(practiceClone);
                 }
             }
         }
