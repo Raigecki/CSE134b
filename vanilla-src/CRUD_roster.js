@@ -9,9 +9,11 @@ function initializeRoster(amount) {
 
     for (var i = 0; i < amount; i++) {
 
-        var stat = (i % 2 == 1) ? 'Stater' : 'Bench-warmer';
+        var stat = (i % 2 == 1) ? 'Starter' : 'Bench-warmer';
         var now = new Date();
         var dob = now.getMonth() + '/' + now.getDate() + '/' + now.getFullYear();
+        var img = document.createElement('img');
+        img.alt = 'Player Icon';
         var stats = {
             fouls: 0,
             redCards: 0,
@@ -25,16 +27,18 @@ function initializeRoster(amount) {
         }
 
         var player = {
+            img: img,
             number: i,
             name: 'Player ' + i,
             status: stat,
             position: 'position ' + i,
-            College: 'UCSD',
-            Hometown: 'San Diego',
-            Age: (30 - i),
+            college: 'UCSD',
+            hometown: 'San Diego',
+            age: (30 - i),
             DOB: Date.now(),
-            ID: (11110 + i),
-            stats: stats
+            ID: ('P' + (11110 + i)),
+            stats: stats,
+            inactive: false
         }
 
         players.push(player);
@@ -48,25 +52,61 @@ function removeRoster() {
     localStorage.removeItem('Roster');
 }
 
-function createPlayer(inputName, pos, num, stat, college, home, age, dob, pid, stats) {
+function getRoster() {
+    return JSON.parse(localStorage.getItem('Roster'));
+}
+
+function createPlayer(img, inputName, pos, num, stat, college, home, age, dob, pid, stats) {
 
     var player = {
+        img: img,
         number: num,
         name: inputName,
         status: stat,
         position: pos,
-        College: college,
-        Hometown: home,
-        Age: age,
+        college: college,
+        hometown: home,
+        age: age,
         DOB: dob,
         ID: pid,
-        stats: stats
+        stats: stats,
+        inactive: false
+    }
+    return player;
+}
+
+function updatePlayerStorage(img, inputName, pos, num, stat, college, home, age, dob, pid) {
+    var backRoster = getRoster();   
+    var index = -1;
+
+    for (var i = 0; i < backRoster.length; i++) {
+
+        if (backRoster[i].ID == pid) {
+
+            console.log('got in if statement');
+            index = i;
+            break;
+        }
     }
 
-    var backRoster = JSON.parse(localStorage.getItem('Roster'));
-    backRoster.push(player);
+    backRoster[i].img = img;
+    backRoster[i].number = num;
+    backRoster[i].inputName = name;
+    backRoster[i].stat = stat;
+    backRoster[i].position = pos;
+    backRoster[i].college = college;
+    backRoster[i].hometown = home;
+    backRoster[i].age = age;
+    backRoster[i].DOB = dob;
+    backRoster[i].ID = pid;
+
     localStorage.setItem('Roster', JSON.stringify(backRoster));
-    return player;
+}   
+
+function setInactiveByIndex(index) {
+    var backRoster = JSON.parse(localStorage.getItem('Roster'));
+    backRoster[index].inactive = true;
+    localStorage.setItem('Roster', JSON.stringify(backRoster));    
 }
 
 function deletePlayerByIndex(index) {
@@ -79,6 +119,7 @@ function deletePlayerByIndex(index) {
 
 function deletePlayerByNumber(num) {
 
+    var backRoster = JSON.parse(localStorage.getItem('Roster'));    
     index = -1;
 
     for (var i = 0; i < backRoster.length; i++) {
@@ -93,20 +134,21 @@ function deletePlayerByNumber(num) {
     else deletePlayerByIndex(index);
 }
 
-function deletePlayerByName(inputName) {
+function deletePlayerById(inputId) {
 
+    var backRoster = JSON.parse(localStorage.getItem('Roster'));    
     index = -1;
 
     for (var i = 0; i < backRoster.length; i++) {
 
-        if (backRoster[i].name == inputName) {
+        if (backRoster[i].ID == inputId && backRoster[i].inactive == false) {
 
             index = i;
             break;
         }
     }
-    if (index == -1) alert('The player with name ' + name + ' cannot be found');
-    else deletePlayerByIndex(index);
+    if (index == -1) alert('The player with ID ' + inputId + ' cannot be found');
+    else setInactiveByIndex(index);
 }
 
 function initializeInputStats() {
