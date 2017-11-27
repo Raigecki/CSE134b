@@ -56,7 +56,29 @@ function getRoster() {
     return JSON.parse(localStorage.getItem('Roster'));
 }
 
-function createPlayer(img, inputName, pos, num, stat, college, home, age, dob, pid, stats) {
+function createUniqueID() {
+    return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+    (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+    );
+}
+
+function checkPlayer(num) {
+    var roster = JSON.parse(localStorage.getItem('Roster'));
+    for (var i = 0; i < roster.length; i++) {
+        if (roster[i].number == num && roster[i].inactive == false) return false
+    }
+    return true;
+}
+
+function checkPlayerUpdate(num, pid) {
+    var roster = JSON.parse(localStorage.getItem('Roster'));
+    for (var i = 0; i < roster.length; i++) {
+        if (roster[i].number == num && roster[i].ID != pid) return false
+    }
+    return true;
+}
+
+function createPlayer(img, inputName, pos, num, stat, college, home, age, dob, stats) {
 
     var player = {
         img: img,
@@ -68,7 +90,7 @@ function createPlayer(img, inputName, pos, num, stat, college, home, age, dob, p
         hometown: home,
         age: age,
         DOB: dob,
-        ID: pid,
+        ID: createUniqueID(),
         stats: stats,
         inactive: false
     };
