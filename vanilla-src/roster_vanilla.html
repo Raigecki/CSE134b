@@ -93,10 +93,18 @@
         margin-top: 1.5rem;
     }
 
+    .playerInfoP {
+      font-size: 4rem !important;
+    }
+
     #save_btn {
       width: 97%;
       height: 8rem;
       margin: 0 1rem 2rem 1rem;
+    }
+
+    #playerTemplate p {
+      font-size: 4rem;
     }
 
     /* The Close Button */
@@ -863,6 +871,31 @@
       padding-right: 15px;
       padding-left: 15px;
     }
+    .col-xs-2 {
+      width: 5%;
+      float: left;
+      position: relative;
+      min-height: 1px;
+      padding-right: 15px;
+      padding-left: 15px;
+    }
+
+    .col-xs-7 {
+      width: 60%;
+      float: left;
+      position: relative;
+      min-height: 1px;
+      padding-right: 15px;
+      padding-left: 15px;
+    }
+    .col-xs-3 {
+      width: 35%;
+      float: left;
+      position: relative;
+      min-height: 1px;
+      padding-right: 15px;
+      padding-left: 15px;
+    }
 
     .btn-primary {
       color: #fff;
@@ -904,7 +937,7 @@
     }
 
     p {
-      font-size: 2rem;
+      font-size: 4rem;
     }
 
     #search_input_group {
@@ -1002,8 +1035,7 @@
                 <input class="form-control" type="text" name="college" placeholder="College">
                 <input class="form-control" type="text" name="hometown" placeholder="Hometown">
                 <input class="form-control" type="number" name="age" placeholder="Age">
-                <input class="form-control" type="text" name="dob" placeholder="DOB">
-                <input class="form-control" type="text" name="pid" placeholder="Player ID">
+                <input class="form-control" type="date" name="dob" placeholder="DOB">
               </form>
             </div>
             <div class="modal-footer">
@@ -1052,12 +1084,14 @@
             <input type="hidden">
             <div class="container">
               <div class="row">
-                <div class="col-xs-4 text-center">
-                  <img class="img-responsive img-circle center-block" alt="Player Icon" src="../src/john_smith.jpg"> 76
+                <div class="col-xs-2 text-left">
+                  <p class="playerInfoP">1</p>
                 </div>
-                <div class="col-xs-8 text-right">
-                  <p>John Smith</p>
-                  <p>Forward</p>
+                <div class="col-xs-7 text-center">
+                  <p class="playerInfoP">John Smith</p>
+                </div>
+                <div class="col-xs-3 text-right">  
+                  <p class="playerInfoP">Forward</p>
                 </div>
               </div>
             </div>
@@ -1087,12 +1121,16 @@
       var hometown = form.children[5].value;
       var age = form.children[6].value;
       var dob = form.children[7].value;
-      var pid = form.children[8].value;
 
-      var player = createPlayer(undefined, name, pos, num, status, college, hometown, age, dob, pid);
+      var unique = checkPlayer(num);
+      if (unique == false) {
+        alert('This number is already taken');
+        return
+      }
+      var player = createPlayer(undefined, name, pos, num, status, college, hometown, age, dob);
       //console.log(player);
-      var playerRow = createPlayerRow(player);
-      playerTable.children[0].appendChild(playerRow.children[0]);
+      var playerRow = createPlayerRowNoImg(player);
+      playerTable.children[0].appendChild(playerRow);
 
       var backRoster = JSON.parse(localStorage.getItem('Roster'));
       backRoster.push(player);
@@ -1129,6 +1167,7 @@
         td.getElementsByTagName('p')[1].innerHTML = player.position;
 
         var clone = document.importNode(playerTemplate.content, true);
+        console.log(clone.children[0]);
         return clone.children[0];
       }
       else {
@@ -1154,7 +1193,7 @@
         col4.setAttribute('class', 'col-xs-4 text-center');
         img.setAttribute('class', 'img-responsive img-circle center-block');
         img.setAttribute('alt', 'Player Icon');
-        img.setAttribute('src', '../src/john_smith.jpg');
+        img.setAttribute('src', '');
         col8.setAttribute('class', 'col-xs-8 text-right');
         name.innerHTML = player.name;
         pos.innerHTML = player.position;
@@ -1168,7 +1207,76 @@
         td.appendChild(input);
         td.appendChild(container);
         tr.appendChild(td);
+        console.log(tr);
+        return tr;
+      }
+    }
 
+    function createPlayerRowNoImg(player) {
+
+      if ('options' in document.createElement('template')) {
+
+        var playerTemplate = document.getElementById('playerTemplate');
+
+        var playerTable = document.getElementById('playerTable');
+        var index = playerTable.childElementCount - 1;
+
+        var tr = playerTemplate.content.children[0];
+        var td = playerTemplate.content.children[0].children[0];
+        tr.setAttribute('data-index', index);
+        tr.setAttribute('onclick', 'link_to_playerinfo(this);');
+
+        //pid
+        td.getElementsByTagName('input')[0].value = player.ID;
+
+        //player p tags
+        td.getElementsByTagName('p')[0].innerHTML = player.num;
+        td.getElementsByTagName('p')[1].innerHTML = player.name;
+        td.getElementsByTagName('p')[2].innerHTML = player.position;
+
+        var clone = document.importNode(playerTemplate.content, true);
+        console.log(clone.children[0]);
+        return clone.children[0];
+      }
+      else {
+
+        var tr = document.createElement('tr');
+        var td = document.createElement('td');
+        var input = document.createElement('input');
+        var container = document.createElement('div');
+        var row = document.createElement('div');
+        var col2 = document.createElement('div');
+        var col7 = document.createElement('div');
+        var col3 = document.createElement('div');
+        var num = document.createElement('p');
+        var name = document.createElement('p');
+        var pos = document.createElement('p');
+    
+        tr.setAttribute('data-index', index);
+        tr.setAttribute('onclick', 'link_to_playerinfo(this);');
+        td.setAttribute('onclick', 'close_remove_modal()');
+        input.setAttribute('type', 'hidden');
+        input.value = player.ID;
+        container.setAttribute('class', 'container');
+        row.setAttribute('class', 'row');
+        col2.setAttribute('class', 'col-xs-2 text-left');
+        col7.setAttribute('class', 'col-xs-7 text-center');
+        col3.setAttribute('class', 'col-xs-3 text-right');
+        num.innerHTML = player.number;
+        name.innerHTML = player.name;
+        pos.innerHTML = player.position;
+    
+        col2.appendChild(num);
+        col7.appendChild(name);
+        col3.appendChild(pos);
+        row.appendChild(col2)
+        row.appendChild(col7);
+        row.appendChild(col3);
+        container.appendChild(row);
+        td.appendChild(input);
+        td.appendChild(container);
+        tr.appendChild(td);
+        console.log(tr);
         return tr;
       }
     }
@@ -1181,7 +1289,7 @@
         var player = roster[i];
 
         if (player.inactive == false) {
-          var playerRow = createPlayerRow(player);
+          var playerRow = createPlayerRowNoImg(player);
           playerTable.children[0].appendChild(playerRow);
         }
       }
