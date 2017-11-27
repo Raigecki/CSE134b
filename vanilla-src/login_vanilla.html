@@ -172,13 +172,19 @@
         function checkCredentials() {
           var in_email = document.getElementById('login_email_input').value;
           var in_password = document.getElementById('login_password_input').value;
-          var backUserList = JSON.parse(localStorage.getItem('userList'));
+          
+          var backUserList = localStorage.getItem('userList');
+          if (backUserList == undefined) {
+            alert('Invalid e-mail or password');
+            return 0;
+          }
+          backUserList = JSON.parse(backUserList);
           var found = false;
 
           for(var i = 0; i < backUserList.length; i++) {
             if (backUserList[i].email == in_email && backUserList[i].password == in_password) {
               localStorage.setItem('currentUser', JSON.stringify(backUserList[i]));
-              found == true;
+              found = true;
               goToHome();
             }
           }
