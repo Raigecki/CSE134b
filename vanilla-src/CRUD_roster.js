@@ -11,7 +11,7 @@ function initializeRoster(amount) {
 
         var stat = (i % 2 == 1) ? 'Starter' : 'Bench-warmer';
         var now = new Date();
-        var dob = now.getMonth() + '/' + now.getDate() + '/' + now.getFullYear();
+        //var dob = now.getMonth() + '/' + now.getDate() + '/' + now.getFullYear();
         var img = document.createElement('img');
         img.alt = 'Player Icon';
         var stats = {
@@ -24,7 +24,7 @@ function initializeRoster(amount) {
             pKicks: 0,
             tIns: 0,
             appearances: 0
-        }
+        };
 
         var player = {
             img: img,
@@ -39,7 +39,7 @@ function initializeRoster(amount) {
             ID: ('P' + (11110 + i)),
             stats: stats,
             inactive: false
-        }
+        };
 
         players.push(player);
     }
@@ -71,20 +71,20 @@ function createPlayer(img, inputName, pos, num, stat, college, home, age, dob, p
         ID: pid,
         stats: stats,
         inactive: false
-    }
+    };
     return player;
 }
 
 function updatePlayerStorage(img, inputName, pos, num, stat, college, home, age, dob, pid) {
     var backRoster = getRoster();   
-    var index = -1;
+    //var index = -1;
 
     for (var i = 0; i < backRoster.length; i++) {
 
         if (backRoster[i].ID == pid) {
 
-            console.log('got in if statement');
-            index = i;
+            //console.log('got in if statement');
+            //index = i;
             break;
         }
     }
@@ -120,7 +120,7 @@ function deletePlayerByIndex(index) {
 function deletePlayerByNumber(num) {
 
     var backRoster = JSON.parse(localStorage.getItem('Roster'));    
-    index = -1;
+    var index = -1;
 
     for (var i = 0; i < backRoster.length; i++) {
 
@@ -137,7 +137,7 @@ function deletePlayerByNumber(num) {
 function deletePlayerById(inputId) {
 
     var backRoster = JSON.parse(localStorage.getItem('Roster'));    
-    index = -1;
+    var index = -1;
 
     for (var i = 0; i < backRoster.length; i++) {
 
@@ -154,7 +154,7 @@ function deletePlayerById(inputId) {
 function initializeInputStats() {
     //alert('Initializing input stats');
     var inputRoster = JSON.parse(localStorage.getItem('Roster'));
-    console.log(inputRoster);
+    //console.log(inputRoster);
     for (var i = 0; i < inputRoster.length; ++i){
         var name = inputRoster[i].name;
         var number = inputRoster[i].number;
@@ -221,7 +221,7 @@ function updateStats(name){
             player.stats.tIns = document.getElementById('tIns').innerText;
             player.stats.appearances = document.getElementById('appearances').innerText;
             //inputRoster[i] = player;
-            console.log(inputRoster);
+            //console.log(inputRoster);
             localStorage.setItem('Roster', JSON.stringify(inputRoster));
             break;
         }

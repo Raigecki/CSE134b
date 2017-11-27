@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Previous Games</title>
+    <meta charset="utf-8">
+
+<style>
+    html {
+        font-size: 10px;
+    }
+
+    body {
+        text-align: center;
+        margin: 5% 5% 5% 5%;
+        font-size: 4rem;
+    }
+
+    .nav {
+        display: block;
+        padding-left: 0;
+        margin-bottom: 0;
+        list-style: none;
+    }
+
+    .nav:before,
+    .nav:after,
+    .row:before,
+    .row:after,
+    .modal-header:before {
+        display: table;
+        content: " ";
+    }
+
+    .nav:after,
+    .row:after {
+        clear: both;
+    }
+
+    .nav>li {
+        position: relative;
+        display: block;
+    }
+
+    .nav>li>a {
+        position: relative;
+        display: block;
+        text-decoration: none;
+        font-size: 3rem;
+        padding: 10px 15px;
+    }
+
+    .nav>li>a:hover,
+    .nav>li>a:focus {
+        text-decoration: none;
+        background-color: #eee;
+    }
+
+    .nav-tabs>li.active>a,
+    .nav-tabs>li.active>a:hover,
+    .nav-tabs>li.active>a:focus {
+        color: #555;
+        cursor: default;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-bottom-color: transparent;
+    }
+
+    .nav-tabs>li>a:hover {
+        border-color: #eee #eee #ddd;
+    }
+
+    .nav-tabs {
+        border-bottom: 1px solid #ddd;
+    }
+
+    .nav-tabs>li {
+        float: left;
+        margin-bottom: -1px;
+    }
+
+    .nav-tabs>li>a {
+        margin-right: 2px;
+        line-height: 1.42857143;
+        border: 1px solid transparent;
+        border-radius: 4px 4px 0 0;
+    }
+
+    h2 {
+        margin-bottom: 2rem;
+        font-size: 6rem;
+    }
+
+    .well {
+        margin-top: 2rem;
+        min-height: 20px;
+        padding: 19px;
+        margin-bottom: 20px;
+        background-color: #f5f5f5;
+        border: 1px solid #e3e3e3;
+        border-radius: 4px;
+    }
+
+    .row {
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+
+    .col-xs-3,
+    .col-xs-6 {
+        position: relative;
+        min-height: 1px;
+        float: left;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .col-xs-3 {
+        width: 25%;
+    }
+
+    .col-xs-6 {
+        width: 50%;
+    }
+
+    ul li {
+        width: 50%;
+    }
+
+    div p {
+        font-size: 2.5rem;
+    }
+
+    p {
+        orphans: 3;
+        widows: 3;
+        margin: 0 0 10px;
+    }
+
+    .col-xs-3 p:nth-child(2) {
+        font-weight: 900;
+    }
+
+    #menuTabs {
+        margin-bottom: 3rem;
+    }
+
+    * {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    *:before,
+    *:after {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    .nav-pills>li {
+            float: left;
+        }
+
+        .nav-pills>li>a {
+            border-radius: 4px;
+        }
+
+        .nav-pills>li+li {
+            margin-left: 2px;
+        }
+
+        .nav-pills>li.active>a,
+        .nav-pills>li.active>a:hover,
+        .nav-pills>li.active>a:focus {
+            color: #fff;
+            background-color: #337ab7;
+        }
+
+        .nav-justified {
+            width: 100%;
+        }
+
+        .nav-justified>li {
+            display: table-cell;
+            width: 1%;
+            float: none;
+        }
+
+        .nav-justified>li>a {
+            margin-bottom: 5px;
+            text-align: center;
+        }
+</style>
+</head>
+<body>
+    <ul id="menuTabs" class="nav nav-pills nav-justified">
+        <li>
+            <a data-toggle="pill" href="homepage.html">Home</a>
+        </li>
+        <li class="active">
+            <a data-toggle="pill">Schedule</a>
+        </li>
+        <li>
+            <a data-toggle="pill" href="roster_vanilla.html">Roster</a>
+        </li>
+        <li>
+            <a data-toggle="pill" href="input_stats_vanilla.html">Input</a>
+        </li>
+        <li>
+            <a data-toggle="pill" href="account_settings.html">Settings</a>
+        </li>
+    </ul>
+    <ul class="nav nav-tabs">
+        <li>
+            <a data-toggle="tab" href="schedule_upcoming.html">Ongoing/Upcoming</a>
+        </li>
+        <li class="active">
+            <a data-toggle="tab" href="">Previous</a>
+        </li>
+    </ul>
+    <div class="well row">
+        <div class="col-xs-3">
+            <p>Team Aztecs</p>
+            <p>1</p>
+            <p>(Home)</p>
+        </div>
+        <div class="col-xs-6">
+            <p>Nov 6, 2017 5:00 PM</p>
+            <p>vs</p>
+            <p>Balboa Park, San Diego</p>
+        </div>
+        <div class="col-xs-3">
+            <p>Opponent</p>
+            <p>0</p>
+            <p>(Away)</p>
+        </div>
+    </div>
+    <div class="well row">
+        <div class="col-xs-3">
+            <p>Team Aztecs</p>
+            <p>2</p>
+            <p>(Away)</p>
+        </div>
+        <div class="col-xs-6">
+            <p>Nov 1, 2017 6:00 PM</p>
+            <p>vs</p>
+            <p>Hourglass Field, Mira Mesa</p>
+        </div>
+        <div class="col-xs-3">
+            <p>Opponent</p>
+            <p>1</p>
+            <p>(Home)</p>
+        </div>
+    </div>
+    <div class="well row">
+        <div class="col-xs-3">
+            <p>Team Aztecs</p>
+            <p>1</p>
+            <p>(Away)</p>
+        </div>
+        <div class="col-xs-6">
+            <p>Oct 28, 2017 5:30 PM</p>
+            <p>vs</p>
+            <p>Athletic Field, Pacific Peach</p>
+        </div>
+        <div class="col-xs-3">
+            <p>Opponent</p>
+            <p>2</p>
+            <p>(Home)</p>
+        </div>
+    </div>
+    <div class="well row">
+        <div class="col-xs-3">
+            <p>Team Aztecs</p>
+            <p>3</p>
+            <p>(Home)</p>
+        </div>
+        <div class="col-xs-6">
+            <p>Oct 21, 2017 7:00 PM</p>
+            <p>vs</p>
+            <p>Balboa Park, San Diego</p>
+        </div>
+        <div class="col-xs-3">
+            <p>Opponent</p>
+            <p>1</p>
+            <p>(Away)</p>
+        </div>
+    </div>
+    <div class="well row">
+        <div class="col-xs-3">
+            <p>Team Aztecs</p>
+            <p>1</p>
+            <p>(Home)</p>
+        </div>
+        <div class="col-xs-6">
+            <p>Oct 19, 2017 5:00 PM</p>
+            <p>vs</p>
+            <p>Balboa Park, San Diego</p>
+        </div>
+        <div class="col-xs-3">
+            <p>Opponent</p>
+            <p>0</p>
+            <p>(Away)</p>
+        </div>
+    </div>
+    <div class="well row">
+        <div class="col-xs-3">
+            <p>Team Aztecs</p>
+            <p>3</p>
+            <p>(Home)</p>
+        </div>
+        <div class="col-xs-6">
+            <p>Oct 17, 2017 8:00 PM</p>
+            <p>vs</p>
+            <p>Balboa Park, San Diego</p>
+        </div>
+        <div class="col-xs-3">
+            <p>Opponent</p>
+            <p>2</p>
+            <p>(Away)</p>
+        </div>
+    </div>
+    <div class="well row">
+        <div class="col-xs-3">
+            <p>Team Aztecs</p>
+            <p>0</p>
+            <p>(Away)</p>
+        </div>
+        <div class="col-xs-6">
+            <p>Oct 15, 2017 6:00 PM</p>
+            <p>vs</p>
+            <p>El Corazon Park, Oceanside</p>
+        </div>
+        <div class="col-xs-3">
+            <p>Opponent</p>
+            <p>1</p>
+            <p>(Home)</p>
+        </div>
+    </div>
+    <div class="well row">
+        <div class="col-xs-3">
+            <p>Team Aztecs</p>
+            <p>2</p>
+            <p>(Away)</p>
+        </div>
+        <div class="col-xs-6">
+            <p>Oct 12, 2017 6:30 PM</p>
+            <p>vs</p>
+            <p>Coronado Cays Park, Coronado</p>
+        </div>
+        <div class="col-xs-3">
+            <p>Opponent</p>
+            <p>1</p>
+            <p>(Home)</p>
+        </div>
+    </div>
+</body>
+
+</html>

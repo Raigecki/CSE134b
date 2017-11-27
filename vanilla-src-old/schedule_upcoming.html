@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Current/Upcoming Games</title>
+    <meta charset="utf-8">
+
+<style>
+    html {
+        font-size: 10px;
+    }
+
+    body {
+        text-align: center;
+        margin: 5% 5% 5% 5%;
+        font-size: 4rem;
+    }
+
+    #menuTabs {
+        margin-bottom: 2rem;
+    }
+
+    .nav {
+        display: block;
+        padding-left: 0;
+        margin-bottom: 0;
+        list-style: none;
+    }
+
+    .nav:before,
+    .nav:after,
+    .row:before,
+    .row:after,
+    .modal-header:before {
+        display: table;
+        content: " ";
+    }
+
+    .nav:after,
+    .row:after,
+    .modal-header:after {
+        clear: both;
+    }
+
+    .nav>li {
+        position: relative;
+        display: block;
+    }
+
+    .nav>li>a {
+        position: relative;
+        display: block;
+        text-decoration: none;
+        font-size: 3rem;
+        padding: 10px 15px;
+    }
+
+    .nav>li>a:hover,
+    .nav>li>a:focus {
+        text-decoration: none;
+        background-color: #eee;
+    }
+
+    .nav-tabs>li.active>a,
+    .nav-tabs>li.active>a:hover,
+    .nav-tabs>li.active>a:focus {
+        color: #555;
+        cursor: default;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-bottom-color: transparent;
+    }
+
+    .nav-tabs>li>a:hover {
+        border-color: #eee #eee #ddd;
+    }
+
+    .nav-tabs {
+        border-bottom: 1px solid #ddd;
+    }
+
+    .nav-tabs>li {
+        float: left;
+        margin-bottom: -1px;
+    }
+
+    .nav-tabs>li>a {
+        margin-right: 2px;
+        line-height: 1.42857143;
+        border: 1px solid transparent;
+        border-radius: 4px 4px 0 0;
+    }
+
+    .nav-pills>li {
+            float: left;
+        }
+
+        .nav-pills>li>a {
+            border-radius: 4px;
+        }
+
+        .nav-pills>li+li {
+            margin-left: 2px;
+        }
+
+        .nav-pills>li.active>a,
+        .nav-pills>li.active>a:hover,
+        .nav-pills>li.active>a:focus {
+            color: #fff;
+            background-color: #337ab7;
+        }
+
+        .nav-justified {
+            width: 100%;
+        }
+
+        .nav-justified>li {
+            display: table-cell;
+            width: 1%;
+            float: none;
+        }
+
+        .nav-justified>li>a {
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+    h2 {
+        margin-bottom: 2rem;
+        font-size: 6rem;
+    }
+
+    ul li {
+        width: 50%;
+    }
+
+    div p {
+        font-size: 2.5rem;
+    }
+
+    p {
+        orphans: 3;
+        widows: 3;
+        margin: 0 0 10px;
+    }
+
+    .col-xs-3 p:nth-child(1) {
+        margin-bottom: 5rem;
+    }
+
+    .text-left {
+        text-align: left;
+    }
+
+    .text-right {
+        text-align: right;
+    }
+
+    input,
+    select {
+        height: 8rem;
+        font-size: 4rem;
+        margin-bottom: 2rem;
+        display: block;
+        width: 100%;
+        line-height: 1.42857143;
+        color: #555;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        z-index: 2;
+    }
+
+    .well {
+        margin-top: 2rem;
+        min-height: 20px;
+        padding: 19px;
+        margin-bottom: 20px;
+        background-color: #f5f5f5;
+        border: 1px solid #e3e3e3;
+        border-radius: 4px;
+    }
+
+    .row {
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+
+    .col-xs-3,
+    .col-xs-6 {
+        position: relative;
+        min-height: 1px;
+        float: left;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .col-xs-3 {
+        width: 25%;
+    }
+
+    .col-xs-6 {
+        width: 50%;
+    }
+
+    .btn {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: inline-block;
+        padding: 6px 12px;
+        margin-bottom: 0;
+        font-size: 14px;
+        font-weight: normal;
+        line-height: 1.42857143;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        position: relative;
+    }
+
+    .btn-success {
+        color: #fff;
+        background-color: #5cb85c;
+        border-color: #4cae4c;
+    }
+
+    .btn-info {
+        color: #fff;
+        background-color: #5bc0de;
+        border-color: #46b8da;
+    }
+
+    .btn-danger {
+        color: #fff;
+        background-color: #d9534f;
+        border-color: #d43f3a;
+    }
+
+    #addGame,
+    #removeGame {
+        font-size: 3rem;
+    }
+
+    #manageButtons {
+        margin-top: 2rem;
+    }
+
+    #gamesList_delete option {
+        font-size: 2rem;
+    }
+
+    * {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    *:before,
+    *:after {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        line-height: 100%;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-content {
+        position: relative;
+        background-color: #fefefe;
+        border-radius: 10px;
+        border: 1px solid #888;
+        width: 80%;
+        margin: 10%;
+        vertical-align: middle;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        -webkit-animation-name: animatetop;
+        -webkit-animation-duration: 0.5s;
+        animation-name: animatetop;
+        animation-duration: 0.5s
+    }
+
+    .modal-header {
+        border-radius: 10px 10px 0px 0px;
+        padding: 4px;
+        background-color: #42b1b1;
+        text-align: center;
+        color: white;
+        height: 10rem;
+        font-size: 4.5rem;
+        padding: 1rem 1rem 1rem 2rem;
+    }
+
+    .modal-body {
+        padding: 4%;
+        position: relative;
+        text-align: center;
+    }
+
+    .modal label {
+        display: block;
+        text-align: left;
+    }
+
+    .modal-header>span:nth-child(1) {
+        display: inline-block;
+        margin-top: 1.5rem;
+    }
+
+    /* The Close Button */
+
+    .close {
+        color: white;
+        float: right;
+        font-size: 6rem;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .btn {
+        width: 100%;
+        height: 10rem;
+        font-size: 5rem;
+    }
+
+    /* Add Animation */
+    @keyframes animatetop {
+        from {
+            top: -300px;
+            opacity: 0
+        }
+        to {
+            top: 0;
+            opacity: 1
+        }
+    }
+</style>
+</head>
+<body>
+        <ul id="menuTabs" class="nav nav-pills nav-justified">
+                <li>
+                    <a data-toggle="pill" href="homepage.html">Home</a>
+                </li>
+                <li class="active">
+                    <a data-toggle="pill">Schedule</a>
+                </li>
+                <li>
+                    <a data-toggle="pill" href="roster_vanilla.html">Roster</a>
+                </li>
+                <li>
+                    <a data-toggle="pill" href="input_stats_vanilla.html">Input</a>
+                </li>
+                <li>
+                    <a data-toggle="pill" href="account_settings.html">Settings</a>
+                </li>
+            </ul>
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a data-toggle="tab" href="">Ongoing/Upcoming</a>
+        </li>
+        <li>
+            <a data-toggle="tab" href="schedule_previous.html">Previous</a>
+        </li>
+    </ul>
+    <div id="manageButtons" class="row">
+            <div class="col-xs-6 text-left">
+                <button type="button" id="addGame" class="btn btn-success btn-lg" onclick="displayAddGame()">Add Game</button>
+            </div>
+            <div class="col-xs-6 text-right">
+                <button type="button" id="removeGame" class="btn btn-danger btn-lg" onclick="displayRemoveGame()">Remove Game</button>
+            </div>
+        </div>
+    <div class="well row">
+        <div class="col-xs-3">
+            <p>Team Aztecs</p>
+            <p>(Home)</p>
+        </div>
+        <div class="col-xs-6">
+            <p>Nov 15, 2017 5:00 PM</p>
+            <p>vs</p>
+            <p>Balboa Park, San Diego</p>
+        </div>
+        <div class="col-xs-3">
+            <p>Opponent</p>
+            <p>(Away)</p>
+        </div>
+    </div>
+    <div class="well row">
+        <div class="col-xs-3">
+            <p>Team Aztecs</p>
+            <p>(Away)</p>
+        </div>
+        <div class="col-xs-6">
+            <p>Nov 17, 2017 6:00 PM</p>
+            <p>vs</p>
+            <p>Hourglass Field, Mira Mesa</p>
+        </div>
+        <div class="col-xs-3">
+            <p>Opponent</p>
+            <p>(Home)</p>
+        </div>
+    </div>
+    <div class="well row">
+        <div class="col-xs-3">
+            <p>Team Aztecs</p>
+            <p>(Away)</p>
+        </div>
+        <div class="col-xs-6">
+            <p>Nov 20, 2017 5:30 PM</p>
+            <p>vs</p>
+            <p>Athletic Field, Pacific Peach</p>
+        </div>
+        <div class="col-xs-3">
+            <p>Opponent</p>
+            <p>(Home)</p>
+        </div>
+    </div>
+    <div class="well row">
+        <div class="col-xs-3">
+            <p>Team Aztecs</p>
+            <p>(Home)</p>
+        </div>
+        <div class="col-xs-6">
+            <p>Nov 21, 2017 7:00 PM</p>
+            <p>vs</p>
+            <p>Balboa Park, San Diego</p>
+        </div>
+        <div class="col-xs-3">
+            <p>Opponent</p>
+            <p>(Away)</p>
+        </div>
+    </div>
+    <div class="well row">
+        <div class="col-xs-3">
+            <p>Team Aztecs</p>
+            <p>(Home)</p>
+        </div>
+        <div class="col-xs-6">
+            <p>Nov 23, 2017 5:00 PM</p>
+            <p>vs</p>
+            <p>Balboa Park, San Diego</p>
+        </div>
+        <div class="col-xs-3">
+            <p>Opponent</p>
+            <p>(Away)</p>
+        </div>
+    </div>
+    <div class="well row">
+        <div class="col-xs-3">
+            <p>Team Aztecs</p>
+            <p>(Home)</p>
+        </div>
+        <div class="col-xs-6">
+            <p>Nov 28, 2017 8:00 PM</p>
+            <p>vs</p>
+            <p>Balboa Park, San Diego</p>
+        </div>
+        <div class="col-xs-3">
+            <p>Opponent</p>
+            <p>(Away)</p>
+        </div>
+    </div>
+    <div class="well row">
+        <div class="col-xs-3">
+            <p>Team Aztecs</p>
+            <p>(Away)</p>
+        </div>
+        <div class="col-xs-6">
+            <p>Dec 2, 2017 6:00 PM</p>
+            <p>vs</p>
+            <p>El Corazon Park, Oceanside</p>
+        </div>
+        <div class="col-xs-3">
+            <p>Opponent</p>
+            <p>(Home)</p>
+        </div>
+    </div>
+    <div class="well row">
+        <div class="col-xs-3">
+            <p>Team Aztecs</p>
+            <p>(Away)</p>
+        </div>
+        <div class="col-xs-6">
+            <p>Dec 4, 2017 6:30 PM</p>
+            <p>vs</p>
+            <p>Coronado Cays Park, Coronado</p>
+        </div>
+        <div class="col-xs-3">
+            <p>Opponent</p>
+            <p>(Home)</p>
+        </div>
+    </div>
+    <!-- Add Game Modal -->
+    <div id="addGameModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span>Add Game</span>
+                <span id="closeAddGame" class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+
+                <form id="addGameForm">
+                    <label for="addGame_opponent">Opponent:</label>
+                    <input type="text" name="addGame_opponent" id="addGame_opponent">
+                    <label for="addGame_date">Date:</label>
+                    <input type="date" name="addGame_date" id="addGame_date">
+                    <label for="addGame_time">Time:</label>
+                    <input type="time" name="addGame_time" id="addGame_time">
+                    <label for="homeaway_status">Home/Away:</label>
+                    <input type="text" name="homeaway_status" id="homeaway_status">
+                    <label for="addGame_loc">Location:</label>
+                    <input type="text" name="addGame_loc" id="addGame_loc">
+                    <label for="addGame_city">City:</label>
+                    <input type="text" name="addGame_city" id="addGame_city">
+                    <input type="submit" id="addGameSubmit" name="addGameSubmit" class="btn btn-success" value="Create Game">
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Delete Game Modal -->
+    <div id="deleteGameModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span>Delete Game</span>
+                <span id="closeDeleteGame" class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+
+                <form id="deleteGameForm">
+                    <select id="gamesList_delete" name="gamesList_delete">
+                        <option value="0" selected disabled>-- Select a Game to Remove--</option>
+                        <option value="1">Nov 15, 2017 5:00 PM vs Opponent @ Balboa Park, San Diego</option>
+                        <option value="2">Nov 17, 2017 6:00 PM vs Opponent @ Hourglass Field, Mira Mesa</option>
+                        <option value="3">Nov 20, 2017 5:30 PM vs Opponent @ Athletic Field, Pacific Peach</option>
+                        <option value="4">Nov 21, 2017 7:00 PM vs Opponent @ Balboa Park, San Diego</option>
+                        <option value="5">Nov 23, 2017 5:00 PM vs Opponent @ Balboa Park, San Diego</option>
+                    </select>
+                    <input type="submit" id="deleteGameSubmit" name="deleteGameSubmit" class="btn btn-danger" value="Remove Game">
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        function displayAddGame() {
+            var addModal = document.getElementById('addGameModal');
+            addModal.style.display = 'block';
+        }
+        function displayRemoveGame() {
+            var deleteModal = document.getElementById('deleteGameModal');
+            deleteModal.style.display = 'block';
+        }
+        document.getElementById('closeAddGame').onclick = function () {
+            var modal = this.parentNode.parentNode.parentNode;
+            modal.style.display = 'none';
+        }
+        document.getElementById('closeDeleteGame').onclick = function () {
+            var modal = this.parentNode.parentNode.parentNode;
+            modal.style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>
