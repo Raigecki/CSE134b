@@ -10,10 +10,6 @@
             if (localStorage.getItem('currentUser') != undefined) {
                 var currentUser = JSON.parse(localStorage.getItem('currentUser'));
                 var selectQ = document.getElementById('securityQuestion');
-                /*console.log(currentUser['question']);
-                console.log(selectQ[selectQ.selectedIndex].innerText);
-                console.log(currentUser['answer']);
-                console.log(document.getElementById('answer').value);*/
                 if (currentUser['question']==selectQ[selectQ.selectedIndex].innerText && currentUser['answer']==document.getElementById('answer').value){
                     currentUser['email'] = document.getElementById('password1').value;
                 }
@@ -60,9 +56,7 @@
         }
 
         #pageFooter {
-            position: absolute;
-            bottom: 5%;
-            width: 94%;
+            width: 100%;
         }
 
         #submitButton {
@@ -126,6 +120,11 @@
         #logoutButton {
             background-color: red;
         }
+
+        section {
+            margin-bottom: 2rem;
+        }
+
     </style>
 
     <!-- Modal Styles -->
@@ -429,9 +428,9 @@
             <a data-toggle="pill">Settings</a>
         </li>
     </ul>
-    <h1>Account Settings</h1>
 
     <section id="pageBody">
+        <h1>Account Settings</h1>
         <div class="sectionTitle">
             <h3>Account Information</h3>
         </div>
@@ -537,9 +536,6 @@
 
             </div>
             <!-- modal body div -->
-
-            <div class="modal-footer">
-            </div>
         </div>
         <!-- content div -->
 
@@ -590,8 +586,6 @@
 
             </div>
             <!-- modal body div -->
-            <div class="modal-footer">
-            </div>
         </div>
         <!-- content div -->
     </div>
@@ -641,9 +635,8 @@
             }
 
             localStorage.setItem('currentUser', JSON.stringify(currentUser));
-            location.href = ("login_vanilla.html");
+            location.href = "login_vanilla.html";
         }
-
         //hide input tab if user is not a coach
         hideInputTab();
 
