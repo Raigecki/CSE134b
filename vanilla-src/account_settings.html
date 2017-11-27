@@ -55,6 +55,16 @@
             color: #444;
         }
 
+        #pageBody {
+            margin-bottom: 8rem;
+        }
+
+        #pageFooter {
+            position: absolute;
+            bottom: 5%;
+            width: 94%;
+        }
+
         #submitButton {
             height: 10rem;
             font-size: 5rem;
@@ -111,6 +121,10 @@
         div label {
             font-size: 3rem;
             font-weight: bold;
+        }
+
+        #logoutButton {
+            background-color: red;
         }
     </style>
 
@@ -210,6 +224,7 @@
     <!-- Bootstrap styles-->
     <style>
         /* ---------------- Button ---------------- */
+
         .btn {
             overflow: hidden;
             text-overflow: ellipsis;
@@ -336,8 +351,7 @@
             content: " ";
         }
 
-        .nav:after
-            {
+        .nav:after {
             clear: both;
         }
 
@@ -417,7 +431,7 @@
     </ul>
     <h1>Account Settings</h1>
 
-    <section>
+    <section id="pageBody">
         <div class="sectionTitle">
             <h3>Account Information</h3>
         </div>
@@ -442,6 +456,9 @@
                 <img id="changeSecurity" alt="edit" src="edit.svg">
             </p>
         </div>
+    </section>
+    <section id="pageFooter">
+        <button id='logoutButton' class='btn btn-lg' onclick="logout()">Logout</button>
     </section>
 
     <!-- Change Email Modal -->
@@ -573,15 +590,11 @@
 
             </div>
             <!-- modal body div -->
-
             <div class="modal-footer">
             </div>
         </div>
         <!-- content div -->
     </div>
-
-
-
 
     <!-- Modal Script -->
     <script>
@@ -613,16 +626,25 @@
             var modal = this.parentNode.parentNode.parentNode;
             modal.style.display = 'none';
         }
+    </script>
+
+    <!-- General Scripts -->
+    <script>
+        function logout() {
+            if (localStorage.getItem('currentUser') != undefined) {
+                var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                currentUser['email'] = undefined;
+                currentUser['password'] = undefined;
+                currentUser['question'] = undefined;
+                currentUser['answer'] = undefined;
+                currentUser['type'] = undefined;
+            }
+
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            location.href = ("login_vanilla.html");
+        }
 
         //hide input tab if user is not a coach
-        /*var U = {
-            email : "hi@mail.com",
-            password : "password",
-            question : "What is your first car?",
-            answer : "none",
-            type : "coach"
-        }
-        localStorage.setItem('currentUser',JSON.stringify(U));*/
         hideInputTab();
 
         //populate the page with current account info
