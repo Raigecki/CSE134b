@@ -4,7 +4,8 @@
     <title>Login</title>
     <style>
       .row{
-        margin: 0;
+        font-size: 5rem;
+        margin: 2rem 0 0 0;
       }
       form {
         padding: 1rem;
@@ -45,9 +46,10 @@
         font-family: sans-serif;
         -webkit-text-size-adjust: 100%;
         -ms-text-size-adjust: 100%;
+        font-size: 10px;
       }
       body {
-        margin: 0;
+        margin: 3%;
       }
       h1 {
         margin: .67em 0;
@@ -73,6 +75,10 @@
         margin: 0;
         font: inherit;
         color: inherit;
+        font-family: inherit;
+        font-size: inherit;
+        line-height: inherit;
+       
       }
       button,
       select {
@@ -85,14 +91,7 @@
         -webkit-appearance: button;
         cursor: pointer;
       }
-      input,
-      button,
-      select,
-      textarea {
-        font-family: inherit;
-        font-size: inherit;
-        line-height: inherit;
-      }
+
       .text-center {
         text-align: center;
       }
@@ -106,10 +105,10 @@
       .form-control {
         display: block;
         width: 100%;
-        height: 34px;
         padding: 6px 12px;
-        font-size: 14px;
-        line-height: 1.42857143;
+        height: 8rem;
+        font-size: 5rem;
+        line-height: 8rem;
         color: #555;
         background-color: #fff;
         background-image: none;
@@ -131,17 +130,17 @@
       .btn {
         display: inline-block;
         padding: 6px 12px;
-        margin-bottom: 0;
-        font-size: 14px;
+        height: 8rem;
+        font-size: 5rem;
+        border-radius: 1rem;
         font-weight: normal;
-        line-height: 1.42857143;
+        line-height: 5rem;;
         text-align: center;
         white-space: nowrap;
         vertical-align: middle;
         cursor: pointer;
         background-image: none;
         border: 1px solid transparent;
-        border-radius: 4px;
       }
     </style>
   </head>
@@ -160,7 +159,7 @@
       </div>      
     </form>
     <div class="row">
-      <button id="login_button" class="btn" onclick="goToHome()">Login</button>
+      <button id="login_button" class="btn" onclick="checkCredentials()">Login</button>
       <button id="create_account_button" class="btn pull-right" onclick="goToCreateAcct()">Create Account</button>
     </div>
     <script>
@@ -170,6 +169,22 @@
         function goToCreateAcct() {
           location.href = ("create_account.html");
         }
+        function checkCredentials() {
+          var in_email = document.getElementById('login_email_input').value;
+          var in_password = document.getElementById('login_password_input').value;
+          var backUserList = JSON.parse(localStorage.getItem('userList'));
+          var found = false;
+
+          for(var i = 0; i < backUserList.length; i++) {
+            if (backUserList[i].email == in_email && backUserList[i].password == in_password) {
+              localStorage.setItem('currentUser', JSON.stringify(backUserList[i]));
+              found == true;
+              goToHome();
+            }
+          }
+          if (found == false) alert('Invalid e-mail or password');
+        }
+
       </script>
   </body>
 </html>
