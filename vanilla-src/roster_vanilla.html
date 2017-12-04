@@ -22,14 +22,14 @@
       var modal = document.getElementById('addModal');
       modal.style.display = 'none';
     }
-    function show_remove_modal(){
+    /*function show_remove_modal(){
       var modal = document.getElementById('removeModal');
       modal.style.display = 'block';
     }
     function close_remove_modal(){
       var modal = document.getElementById('removeModal');
       modal.style.display = 'none';
-    }
+    }*/
   </script>
   <style>
     @font-face {
@@ -1012,7 +1012,7 @@
     <tbody>
       <tr>
         <td>
-          <button type="button" class="btn btn-primary fourty" onclick="show_add_modal()">Add a player</button>
+          <button id="addPlayerButton" type="button" class="btn btn-primary fourty" onclick="show_add_modal()">Add a player</button>
         </td>
       </tr>
     </tbody>
@@ -1028,14 +1028,15 @@
             </div>
             <div class="modal-body">
               <form id="addPlayerForm">
-                <input class="form-control" type="text" name="name" placeholder="Name">
-                <input class="form-control" type="text" name="position" placeholder="Postion">
-                <input class="form-control" type="number" name="number" placeholder="Number">
-                <input class="form-control" type="text" name="status" placeholder="Status">
-                <input class="form-control" type="text" name="college" placeholder="College">
-                <input class="form-control" type="text" name="hometown" placeholder="Hometown">
-                <input class="form-control" type="number" name="age" placeholder="Age">
-                <input class="form-control" type="date" name="dob" placeholder="DOB">
+                <input class="form-control" type="text" name="name" placeholder="Name" required>
+                <input class="form-control" type="text" name="position" placeholder="Position" required>
+                <input class="form-control" type="number" name="number" placeholder="Number" required>
+                <input class="form-control" type="text" name="status" placeholder="Status" required>
+                <input class="form-control" type="text" name="college" placeholder="College" required>
+                <input class="form-control" type="text" name="hometown" placeholder="Hometown" required>
+                <input class="form-control" type="number" name="age" placeholder="Age" required>
+                <label style="display: block;font-size: 4rem;margin: 2rem 0 2rem 0;">DOB:</label>
+                <input class="form-control" type="date" name="dob" placeholder="DOB" required>
               </form>
             </div>
             <div class="modal-footer">
@@ -1044,10 +1045,10 @@
           </div>
       </div>
   </div>
-  <div class="container">
-      <!-- Modal -->
+  <!--< div class="container">
+      Modal
       <div class="modal" id="removeModal">
-          <!-- Modal content-->
+          Modal content
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" onclick="close_remove_modal()">&times;</button>
@@ -1076,11 +1077,12 @@
             </div>
           </div>
       </div>
-  </div>
+  </div>-->
 
   <template id="playerTemplate">
       <tr>
-          <td onclick="close_remove_modal()">
+          <!--<td onclick="close_remove_modal()">-->
+              <td>
             <input type="hidden">
             <div class="container">
               <div class="row">
@@ -1127,7 +1129,18 @@
         alert('This number is already taken');
         return
       }
-      var player = createPlayer(undefined, name, pos, num, status, college, hometown, age, dob);
+      var stats = {
+            fouls: 0,
+            redCards: 0,
+            yellowCards: 0,
+            shotsOnGoal: 0,
+            goals: 0,
+            cKicks: 0,
+            pKicks: 0,
+            tIns: 0,
+            appearances: 0
+        };
+      var player = createPlayer(undefined, name, pos, num, status, college, hometown, age, dob,stats);
       //console.log(player);
       var playerRow = createPlayerRowNoImg(player);
       playerTable.children[0].appendChild(playerRow);
@@ -1185,7 +1198,7 @@
     
         tr.setAttribute('data-index', index);
         tr.setAttribute('onclick', 'link_to_playerinfo(this);');
-        td.setAttribute('onclick', 'close_remove_modal()');
+        //td.setAttribute('onclick', 'close_remove_modal()');
         input.setAttribute('type', 'hidden');
         input.value = player.ID;
         container.setAttribute('class', 'container');
@@ -1254,7 +1267,7 @@
     
         tr.setAttribute('data-index', index);
         tr.setAttribute('onclick', 'link_to_playerinfo(this);');
-        td.setAttribute('onclick', 'close_remove_modal()');
+        //td.setAttribute('onclick', 'close_remove_modal()');
         input.setAttribute('type', 'hidden');
         input.value = player.ID;
         container.setAttribute('class', 'container');
@@ -1298,7 +1311,7 @@
 
   <!-- Page Scripts--> 
   <script>
-    if (localStorage.getItem('Roster') == undefined) initializeRoster(1);
+    if (localStorage.getItem('Roster') == undefined) initializeRoster(0);
     setPlayerTable();
   </script>
   <script>
@@ -1312,6 +1325,9 @@
     }
     localStorage.setItem('currentUser',JSON.stringify(u));*/
     hideInputTab();
+    if (localStorage.getItem('currentUser') == undefined || JSON.parse(localStorage.getItem('currentUser')).type != 'Coach') {
+        document.getElementById('addPlayerButton').style.display = 'none';
+    }
   </script>
 </body>
 

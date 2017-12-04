@@ -753,10 +753,10 @@
       var infoPlayer = localStorage.getItem('currentPlayer');
       var inputRoster = JSON.parse(localStorage.getItem('Roster'));
       for (var i = 0; i < inputRoster.length; ++i){
-        if (inputRoster[i].name == infoPlayer){
+        if (inputRoster[i].ID == infoPlayer){
           console.log(inputRoster[i]);
           console.log(inputRoster);
-          document.getElementById('statsPlayerName').innerText = infoPlayer;
+          document.getElementById('statsPlayerName').innerText = inputRoster[i].name;
           document.getElementById('statsPlayerFouls').innerText = inputRoster[i].stats.fouls;
           document.getElementById('statsPlayerRcards').innerText = inputRoster[i].stats.redCards;
           document.getElementById('statsPlayerYcards').innerText = inputRoster[i].stats.yellowCards;
